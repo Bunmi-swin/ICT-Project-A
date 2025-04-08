@@ -45,10 +45,14 @@
       text-align: left;
     }
 
-    #sender, #message {
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    #message {
+      flex: 1;
       padding: 8px;
-      width: 100%;
-      margin-bottom: 10px;
       border: 1px solid #aaa;
       border-radius: 5px;
     }
@@ -60,74 +64,26 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     #send-btn:hover {
       background-color: #0056b3;
     }
-
-    #logout-message {
-      display: none;
-      text-align: center;
-      background-color: #fff3cd;
-      color: #856404;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-    }
-
-    #login-again-btn {
-      margin-top: 10px;
-      padding: 8px 16px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    #login-again-btn:hover {
-      background-color: #218838;
-    }
   </style>
 </head>
 <body>
-  <h2>Staff and Family Messaging</h2>
-
-  <input type="text" id="sender" placeholder="Enter your name" />
+  <h2>Chat With Us</h2>
 
   <div id="chat-box"></div>
 
-  <input type="text" id="message" placeholder="Type your message here" />
-  <button id="send-btn" onclick="sendMessage()">Send</button>
-
-  <div id="logout-message">
-    <p>You have been logged out due to inactivity.</p>
-    <button id="login-again-btn" onclick="loginAgain()">Login Again</button>
+  <div class="input-group">
+    <input type="text" id="message" placeholder="Type your message here" />
+    <button id="send-btn" onclick="sendMessage()">Send</button>
   </div>
 
   <script>
-    let inactivityTimer;
-
-    function resetInactivityTimer() {
-      clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(logoutUser, 10000); // 30 seconds of inactivity
-    }
-
-    function logoutUser() {
-      document.getElementById("sender").disabled = true;
-      document.getElementById("message").disabled = true;
-      document.getElementById("send-btn").disabled = true;
-      document.getElementById("logout-message").style.display = "block";
-    }
-
-    function loginAgain() {
-      document.getElementById("sender").disabled = false;
-      document.getElementById("message").disabled = false;
-      document.getElementById("send-btn").disabled = false;
-      document.getElementById("logout-message").style.display = "none";
-      resetInactivityTimer();
-    }
+    const currentUser = "You";
 
     function loadMessages() {
       fetch("get_messages.php")
@@ -135,7 +91,6 @@
         .then(data => {
           const chatBox = document.getElementById("chat-box");
           chatBox.innerHTML = "";
-          const currentUser = document.getElementById("sender").value;
 
           data.forEach(msg => {
             const div = document.createElement("div");
@@ -150,15 +105,13 @@
     }
 
     function sendMessage() {
-      const sender = document.getElementById("sender").value.trim();
       const message = document.getElementById("message").value.trim();
-
-      if (!sender || !message) return;
+      if (!message) return;
 
       fetch("send_message.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `sender=${encodeURIComponent(sender)}&message=${encodeURIComponent(message)}`
+        body: `sender=${encodeURIComponent(currentUser)}&message=${encodeURIComponent(message)}`
       })
       .then(() => {
         document.getElementById("message").value = "";
@@ -166,14 +119,8 @@
       });
     }
 
-    // Monitor user activity
-    ['click', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(evt => {
-      window.addEventListener(evt, resetInactivityTimer);
-    });
-
     setInterval(loadMessages, 2000);
     loadMessages();
-    resetInactivityTimer();
   </script>
 </body>
 </html>
