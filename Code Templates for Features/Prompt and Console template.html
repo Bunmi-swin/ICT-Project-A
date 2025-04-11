@@ -9,22 +9,54 @@
       <hr>
       <h2>Error, Confirmation and Console Output Template </h2>
 
-      <form onsubmit="return myFunction(event)">
+      <form onsubmit="return WrongCredential(event)">
         <label for="address">Country:</label>
         <input type="text" id="address" name="address"><br><br>
         <input type="submit" value="Submit">
       </form>
 
+      <form onsubmit="return WrongPassword(event)">
+        <label for="Username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="Password">Password:</label>
+        <input type="text" id="password" name="password"><br><br>
+        <input type="submit" value="Submit">
+      </form>
+
+    
       <script>
-        function myFunction(event) {
+        //"Portable" Error Templates
+        function WrongCredential(event) {
         event.preventDefault(); // Prevent form submission
+        const validCountries = ["Australia", "Britain", "Brazil", "France"]; // List of valid countries
         const country = document.getElementById("address").value; // Get the input value
-        if (country != "Australia") {
-        alert("The only valid option is Australia.");
+        if (!validCountries.includes(country)) {
+        alert("The valid options are: " + validCountries.join(", ") + ("."))
         } else {
           console.log("User's mailing address is within the country of:", country); // Creates a console file of user's action
           alert("A console file has successfully been created.");
         }
+      }
+        //Password Error
+        function WrongPassword(event) {
+        event.preventDefault(); // Prevent form submission
+        const passwords =["Speed64", "Triumph@nt", "*Sh^eld*"]; // List of valid countries
+        const usernames = ["Racer, Battler, Defender"]
+        const inputpassword = document.getElementById("password").value; // Get the input value
+        const inputusername = document.getElementById("username").value;
+        
+        const usernameIndex = usernames.indexOf(inputUsername)
+        
+        if (usernameIndex === -1) {
+        alert("That account does not exist.")
+        } else if (!passwords.includes(inputpassword)) {
+          alert("You have entered an incorrect password. Please try again.")
+       }  else if (passwords[usernameIndex] !== inputPassword){
+        alert("The password does not match the username. Please try again.")
+       }
+       else {
+        alert("Logged in successfully.")
+       }
       }
       </script>
     </body>
