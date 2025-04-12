@@ -3,28 +3,73 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/patientstyle.css" rel="stylesheet" type="text/css">
+    <link href="css/universalstyle.css" rel="stylesheet" type="text/css">
     <style></style>
 	<title>Patient Page</title>
 </head>
+<header>
 <nav>
     <div>
-    <a class="active" href="home.html">Home</a>
+        <a class="active" href="home.html">Home</a>
     </div>
-    <a class="nav-link" href="aboutus.html ">About Us</a>
+        <a class="nav-link" href="aboutus.html ">About Us</a>
     <div>
-    <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="services.html">Services</a>
     </div>
-    <a class="nav-link" href="contactus.html">Contact Us</a>
+        <a class="nav-link" href="contactus.html">Contact Us</a>
     <div>
-    <a class="nav-link" href="bookings.html">Book Appointments</a>
+        <a class="nav-link" href="bookings.html">Book Appointments</a>
     </div>
-    <a class="nav-link" href="signin.html">Register/Login</a>
+    <div>
+        <a class="nav-link" href="login test 1.html">Register/Login</a>
+    </div>
+    <div>
+        <a class="nav-link" href="services.html">Services</a>
+    </div>
+    <div>
+        <a class="nav-link" href="chat.html">Live Support</a>
+    </div>
+    <div>
+        <a class="nav-link" id="hidden" href="staff.html">Staff</a>
+    </div>
+    <div>
+        <a class="nav-link" id="hidden" href="carer.html">Carers</a>
+    </div>
 
 </nav>
+</header>
+<body>
+    <script>
+
+        // Simulate login and store user details in sessionStorage
+        sessionStorage.setItem("username", "Defender");
+        // Retrieve username from sessionStorage
+        const username = sessionStorage.getItem("username");
+        // Check if the username exists
+        if (username) {
+          // Displays personalised welcome message
+          document.getElementById("welcomeMessage").textContent = `Hello, ${username}!`;
+        } else {
+          // Redirect to login page if no username is found
+          alert("You are not logged in. Redirecting to login page.");
+          window.location.href = "login test 1.html";
+        }
+      </script>
 <main>
 
+    <!--Main Content-->
+        <div id="Profile">
+                <h2>Profile</h2>
+                <p>Username:</p>
+                <p>Length of Membership:</p>
+        </div>
+        <div>
+            <article>
+
+            </article>
+        </div>
+        
+
 </main>
-<body>
 </body>
 </html>
