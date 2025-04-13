@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aged Care Booking</title>
+  <link rel="stylesheet" href="booking.css" />
+</head>
+<body>
+  <main>
+    <h1>Book a Service</h1>
+    <div class="booking-container">
+      <form>
+        <input type="text" placeholder="Full Name" required />
+        <input type="date" required />
+        <input type="time" required />
+        
+        <select required>
+          <option value="">Select Service</option>
+          <option value="in-home-care">In-home Care</option>
+          <option value="residential-care">Residential Care</option>
+          <option value="medical-checkup">Medical Check-up</option>
+        </select>
+
+        <textarea placeholder="Additional notes..."></textarea>
+        <button type="submit">Book Now</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
