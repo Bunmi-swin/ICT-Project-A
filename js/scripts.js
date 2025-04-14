@@ -32,63 +32,95 @@
     }
     
     // Attach event listeners to the "Register" and "Login" links
-    document.getElementById("switchToRegister").addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent default link behavior
-      toggleForms();
-    });
+    document.addEventListener("DOMContentLoaded", () => {
+      // Attach the login function to the form
+      const loginForm = document.getElementById("loginForm");
+      console.log("loginForm:", loginForm); // Debugging statement
+      if (loginForm) {
+        loginForm.addEventListener("submit", login);
+      } else {
+        console.error("Element with id 'loginForm' not found in the DOM.");
+      }
     
-    document.getElementById("switchToLogin").addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent default link behavior
-      toggleForms();
+      // Attach event listeners to the "Register" and "Login" links
+      const switchToRegister = document.getElementById("switchToRegister");
+      if (switchToRegister) {
+        switchToRegister.addEventListener("click", (event) => {
+          event.preventDefault();
+          toggleForms();
+        });
+      } else {
+        console.error("Element with id 'switchToRegister' not found in the DOM.");
+      }
+    
+      const switchToLogin = document.getElementById("switchToLogin");
+      if (switchToLogin) {
+        switchToLogin.addEventListener("click", (event) => {
+          event.preventDefault();
+          toggleForms();
+        });
+      } else {
+        console.error("Element with id 'switchToLogin' not found in the DOM.");
+      }
     });
 
       document.getElementById('loginForm').addEventListener('submit', login)
     
 
-    function login(event) {
-      event.preventDefault(); // Prevent form submission
-    
-      const inputEmail = document.getElementById("email").value.trim();
-      const inputPassword = document.getElementById("password").value.trim();
-      const roleSelect = document.getElementById("roleSelect").value;
-    
-      // Find the user by email
-      const user = users.find(u => u.email === inputEmail);
-    
-      // Simulate password validation
-      const validPasswords = { Defender: "*Sh^eld*", Racer: "Speed64", Battler: "Triumph@nt" };
-      if (!user || validPasswords[user.username] !== inputPassword) {
-        alert("Invalid email or password.");
-        return;
+      function login(event) {
+        event.preventDefault(); // Prevent form submission
+      
+        const inputEmail = document.getElementById("email").value.trim();
+        const inputPassword = document.getElementById("password").value.trim();
+        const roleSelect = document.getElementById("roleSelect").value;
+      
+        console.log("Email entered:", inputEmail);
+        console.log("Password entered:", inputPassword);
+        console.log("Role selected:", roleSelect);
+      
+        // Find the user by email
+        const user = users.find(u => u.email === inputEmail);
+        console.log("User found:", user);
+      
+        // Simulate password validation
+        const validPasswords = { Defender: "*Sh^eld*", Racer: "Speed64", Battler: "Triumph@nt" };
+      
+        // Check if the email is valid
+        if (!user) {
+          alert("Invalid email.");
+          return;
+        }
+      
+        // Check if the password is correct
+        if (validPasswords[user.username] !== inputPassword) {
+          alert("Invalid password.");
+          return;
+        }
+      
+        // Check if the selected role matches the user's role
+        if (user.role !== roleSelect) {
+          alert("Selected role does not match your account role.");
+          return;
+        }
+      
+        // Store the user's role and username in sessionStorage
+        sessionStorage.setItem("role", user.role);
+        sessionStorage.setItem("username", user.username);
+      
+        // Redirect based on role
+        if (user.role === "Staff") {
+          alert("Login successful! Redirecting to staff page...");
+          window.location.href = "staff.html";
+        } else if (user.role === "Carer") {
+          alert("Login successful! Redirecting to carer page...");
+          window.location.href = "carer.html";
+        } else if (user.role === "User") {
+          alert("Login successful! Redirecting to patient page...");
+          window.location.href = "patient.html";
+        } else {
+          alert("Unknown role. Please contact support.");
+        }
       }
-    
-      // Check if the selected role matches the user's role
-      if (user.role.toLowerCase() !== roleSelect.toLowerCase()) {
-        alert("Selected role does not match your account role.");
-        return;
-      }
-    
-      // Store the user's role and username in sessionStorage
-      sessionStorage.setItem("role", user.role);
-      sessionStorage.setItem("username", user.username);
-    
-      // Redirect based on role
-      if (user.role === "Staff") {
-        alert("Login successful! Redirecting to staff page...");
-        window.location.href = "staff.html";
-      } else if (user.role === "Carer") {
-        alert("Login successful! Redirecting to carer page...");
-        window.location.href = "carer.html";
-      } else if (user.role === "User") {
-        alert("Login successful! Redirecting to patient page...");
-        window.location.href = "patient.html";
-      } else {
-        alert("Unknown role. Please contact support.");
-      }
-    }
-    
-    // Attach the login function to the form
-    document.getElementById("loginForm").addEventListener("submit", login);
 
       function switchrole(role){
         if (role == "Staff"){

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aged Care Login & Register</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="js/scripts.js"></script>
 </head>
 <body>
   <div class="container">
@@ -12,17 +13,17 @@
       <h2>Login</h2>
       <input type="email" id="email" placeholder="Email" required />
       <input type="password" id ="password" placeholder="Password" required />
-      <select required>
+      <select id = "roleSelect" required>
         <option value="">Select Role</option>
-        <option value="admin">Admin</option>
-        <option value="carer">Carer</option>
-        <option value="family">Family Member</option>
+        <option value="Staff">Admin</option>
+        <option value="Carer">Carer</option>
+        <option value="User">Family Member</option>
       </select>
      <!--<label><input type="checkbox" /> Remember Me</label>-->
      <a href="#" style="float: right; font-size: 12px;">Forgot Password?</a>
-      <button type="submit">Login</button>
+      <button type="submit" id="loginbutton">Login</button>
       <div class="switch">
-        Don't have an account? <a>Register</a> <!---->
+        Don't have an account? <a id="switchToRegister">Register</a> <!---->
       </div>
     </form>
 
@@ -34,13 +35,13 @@
       <input type="password" placeholder="Confirm Password" required />
       <select id="registerRoleSelect" required>
         <option value="">Select Role</option>
-        <option value="admin">Admin</option>
-        <option value="carer">Carer</option>
-        <option value="family">Family Member</option>
+        <option value="Staff">Admin</option>
+        <option value="Carer">Carer</option>
+        <option value="User">Family Member</option>
       </select>
       <button type="submit">Register</button>
       <div class="switch">
-        Already have an account? <a>Login</a> <!-- onclick="toggleForms()" -->
+        Already have an account? <a id="switchToLogin">Login</a> <!-- onclick="toggleForms()" -->
       </div>
     </form>
   </div>
