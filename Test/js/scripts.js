@@ -20,9 +20,9 @@
     // Define users and their roles:
 
     const users = [
-      { email: "Calmmind@gmail.com", username: "Defender", role: "Staff", time: "2 years" },
-      { email: "Gogetter@outlook.com", username: "Racer", role: "Carer", time: "1 year" },
-      { email: "247Ready@gmail.com", username: "Battler", role: "User", time: "1 year"}
+      { email: "Calmmind@gmail.com", username: "Defender", role: "admin", time: "2 years" },
+      { email: "Gogetter@outlook.com", username: "Racer", role: "familymember", time: "1 year" },
+      { email: "247Ready@gmail.com", username: "Battler", role: "resident", time: "1 year"}
     ];
 
     function toggleForms() {
@@ -108,15 +108,15 @@
         sessionStorage.setItem("username", user.username);
       
         // Redirect based on role
-        if (user.role === "Staff") {
-          alert("Login successful! Redirecting to staff page...");
-          window.location.href = "staff.html";
-        } else if (user.role === "Carer") {
-          alert("Login successful! Redirecting to carer page...");
-          window.location.href = "carer.html";
-        } else if (user.role === "User") {
-          alert("Login successful! Redirecting to patient page...");
-          window.location.href = "patient.html";
+        if (user.role === "admin") {
+          alert("Login successful! Redirecting to admin page...");
+          window.location.href = "staffpage.html";
+        } else if (user.role === "familymember") {
+          alert("Login successful! Redirecting to family member page...");
+          window.location.href = "familymember.html";
+        } else if (user.role === "resident") {
+          alert("Login successful! Redirecting to resident page...");
+          window.location.href = "resident.html";
         } else {
           alert("Unknown role. Please contact support.");
         }
