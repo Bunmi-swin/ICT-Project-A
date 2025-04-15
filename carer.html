@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/universalstyle.css" rel="stylesheet" type="text/css">
-    <style></style>
+    <script src="js/scripts.js"></script>
 	<title>Patient Page</title>
 </head>
 <header>
@@ -22,22 +22,6 @@
 </nav>
 </header>
 <body>
-    <script>
-
-        // Simulate login and store user details in sessionStorage
-        sessionStorage.setItem("username", "Defender");
-        // Retrieve username from sessionStorage
-        const username = sessionStorage.getItem("username");
-        // Check if the username exists
-        if (username) {
-          // Displays personalised welcome message
-          document.getElementById("welcomeMessage").textContent = `Hello, ${username}!`;
-        } else {
-          // Redirect to login page if no username is found
-          alert("You are not logged in. Redirecting to login page.");
-          window.location.href = "login test 1.html";
-        }
-      </script>
 <main>
 
     <!--Main Content-->
@@ -47,7 +31,7 @@
                 <p id="profileplaceholder2">Length of Membership:</p>
         </div>
         <div id="Service List">
-            <h2> You are currently eligible for these services:</h2>
+            <h2> Your family member is currently eligible for these services:</h2>
             <ul>
                 <li>Service 1</li>
                 <li>Service 2</li>
@@ -56,7 +40,7 @@
             <ul>
         </div>
         <div>
-            <button>Book an appointment</button>
+            <button onclick="window.location.href='Booking test 1.html';">Book an appointment</button>
         </div>
 
 </main>
