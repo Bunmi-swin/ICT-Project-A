@@ -292,10 +292,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Append the button only on the staff page
-  if (window.location.pathname.endsWith("staff.html")) {
-    const staffScheduleDiv = document.getElementById("Staff Schedule");
-    if (staffScheduleDiv) {
-      staffScheduleDiv.appendChild(downloadButton); // Add the button to the Staff Schedule section
+  if (window.location.pathname.endsWith("staffpage.html")) {
+    const monitoringstaffactivity = document.getElementById("monitoringstaffactivity");
+    if (monitoringstaffactivity) {
+      monitoringstaffactivity.appendChild(downloadButton); // Add the button to the Staff Schedule section
     } else {
       console.error("Element with id 'Staff Schedule' not found.");
     }
