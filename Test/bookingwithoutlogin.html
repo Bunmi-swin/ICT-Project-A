@@ -5,23 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aged Care Booking</title>
   <link rel="stylesheet" href="booking.css" />
-
 </head>
 <body>
   <nav class="nav">
     <a class="active" href="homepage.html">Home</a>
     <a href="about_us.html">About Us</a>
     <a href="service.html">Service</a>
-    <a href="contact_us.html">Contact Us </a>
+    <a href="contact_us.html">Contact Us</a>
     <a href="booking_button.html">Booking Button</a>
-    <a href="registerlogin.html">Register/login</a>
-
+    <a href="registerlogin.html">Register/Login</a>
   </nav>
+
   <main>
     <h1>Book a Service</h1>
     <div class="booking-container">
-      <form>
+      <form id="bookingForm">
         <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email Address" required />
         <input type="date" required />
         <input type="time" required />
         
@@ -37,5 +37,16 @@
       </form>
     </div>
   </main>
+
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent actual form submission
+      // Simulate success and redirect
+      window.location.href = 'thankyoub.html';
+    });
+  </script>
 </body>
 </html>
+
+
+
