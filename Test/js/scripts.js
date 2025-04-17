@@ -55,6 +55,38 @@
     
         const switchToLogin = document.getElementById("switchToLogin");
         if (switchToLogin) {
+          // Register form handling
+      const registerForm = document.getElementById("registerForm");
+      if (registerForm) {
+        registerForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+    const formInputs = registerForm.querySelectorAll("input, select");
+    const email = formInputs[1].value.trim();
+    const password = formInputs[2].value;
+    const confirmPassword = formInputs[3].value;
+    const role = registerForm.querySelector("#roleSelect")?.value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    // Fetch existing users from localStorage
+    let storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+    if (storedUsers.some(user => user.email === email)) {
+      alert("An account with this email already exists.");
+      return;
+    }
+
+    storedUsers.push({ email, password, role });
+    localStorage.setItem("users", JSON.stringify(storedUsers));
+    alert("Registration successful! You can now log in.");
+    toggleForms();
+  });
+}
+
           switchToLogin.addEventListener("click", (event) => {
             event.preventDefault();
             toggleForms();
@@ -67,60 +99,51 @@
 
     
 
-      function login(event) {
-        event.preventDefault(); // Prevent form submission
-      
-        const inputEmail = document.getElementById("email").value.trim();
-        const inputPassword = document.getElementById("password").value.trim();
-        const roleSelect = document.getElementById("roleSelect").value;
-      
-        console.log("Email entered:", inputEmail);
-        console.log("Password entered:", inputPassword);
-        console.log("Role selected:", roleSelect);
-      
-        // Find the user by email
-        const user = users.find(u => u.email === inputEmail);
-        console.log("User found:", user);
-      
-        // Simulate password validation
-        const validPasswords = { Defender: "*Sh^eld*", Racer: "Speed64", Battler: "Triumph@nt" };
-      
-        // Check if the email is valid
-        if (!user) {
-          alert("Invalid email.");
-          return;
-        }
-      
-        // Check if the password is correct
-        if (validPasswords[user.username] !== inputPassword) {
-          alert("Invalid password.");
-          return;
-        }
-      
-        // Check if the selected role matches the user's role
-        if (user.role !== roleSelect) {
-          alert("Selected role does not match your account role.");
-          return;
-        }
-      
-        // Store the user's role and username in sessionStorage
-        sessionStorage.setItem("role", user.role);
-        sessionStorage.setItem("username", user.username);
-      
-        // Redirect based on role
-        if (user.role === "admin") {
-          alert("Login successful! Redirecting to admin page...");
-          window.location.href = "staffpage.html";
-        } else if (user.role === "familymember") {
-          alert("Login successful! Redirecting to family member page...");
-          window.location.href = "familymember.html";
-        } else if (user.role === "resident") {
-          alert("Login successful! Redirecting to resident page...");
-          window.location.href = "resident.html";
-        } else {
-          alert("Unknown role. Please contact support.");
-        }
+    function login(event) {
+      event.preventDefault();
+    
+      const inputEmail = document.getElementById("email").value.trim();
+      const inputPassword = document.getElementById("password").value.trim();
+      const roleSelect = document.getElementById("roleSelect").value;
+    
+      console.log("Email entered:", inputEmail);
+      console.log("Password entered:", inputPassword);
+      console.log("Role selected:", roleSelect);
+    
+      const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+    
+      const allUsers = [...users, ...storedUsers];
+    
+      const user = allUsers.find(
+        u => u.email === inputEmail && u.password === inputPassword && u.role === roleSelect
+      );
+    
+      if (!user) {
+        alert("Invalid email, password, or role.");
+        return;
       }
+    
+      // Store role & username (or email if no username)
+      sessionStorage.setItem("role", user.role);
+      sessionStorage.setItem("username", user.username || user.email);
+    
+      // Log and redirect
+      alert("Login successful! Redirecting...");
+    
+      if (user.role === "admin") {
+        alert("Login successful! Redirecting to admin page...");
+        window.location.href = "staffpage.html";
+      } else if (user.role === "familymember") {
+        alert("Login successful! Redirecting to family member page...");
+        window.location.href = "familymember.html";
+      } else if (user.role === "resident") {
+        alert("Login successful! Redirecting to resident page...");
+        window.location.href = "resident.html";
+      } else {
+        alert("Unknown role. Please contact support.");
+      }
+    }
+    
 
       function switchrole(role){
         if (role == "Staff"){
