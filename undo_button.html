@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" , inital-scale="1.0" />
+    <title>Undo Button</title>
+
+</head>
+
+<body>
+
+    <h2>Revert Changes</h2>
+
+    <div id="item-list">
+        <div class="item" id="item">
+            <button onclick="deleteItem('item')">Delete</button>
+        </div>
+    </div>
+
+    <div id="undo-container" class="undo-message"></div>
+
+    <script>
+        let recentlyDeleted = null;
+        let undoTimeout = null;
+
+        function deleteItem(itemId) {
+            const item = document.getElementById(itemId);
+            item.style.display = 'none';
+
+            recentlyDeleted = item;
+
+            const undoContainer = document.getElementById('undo-container');
+            undoContainer.innerHTML = `
+        Confirmation on delete will be in 10 seconds. 
+        <button onclick="undoDelete()">Undo</button>
+      `;
+
+            undoTimeout = setTimeout(() => {
+                if (recentlyDeleted) {
+                    recentlyDeleted.remove();
+                    undoContainer.textContent = '';
+                    recentlyDeleted = null;
+                }
+            }, 10000);
+        }
+
+        function undoDelete() {
+            if (recentlyDeleted) {
+                clearTimeout(undoTimeout);
+                recentlyDeleted.style.display = '';
+                document.getElementById('undo-container').textContent = '';
+                recentlyDeleted = null;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
