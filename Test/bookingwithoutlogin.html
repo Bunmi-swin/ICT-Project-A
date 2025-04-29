@@ -5,23 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aged Care Booking</title>
   <link rel="stylesheet" href="booking.css" />
+  <script src="js/scripts.js"></script>
+
 </head>
 <body>
   <nav class="nav">
     <a class="active" href="homepage.html">Home</a>
     <a href="about_us.html">About Us</a>
     <a href="service.html">Service</a>
-    <a href="contact_us.html">Contact Us</a>
-    <a href="booking_button.html">Booking Button</a>
-    <a href="registerlogin.html">Register/Login</a>
-  </nav>
+    <a href="contact_us.html">Contact Us </a>
+    <!-- <a href="booking_button.html">Booking Button</a> -->
+    <a href="registerlogin.html" onclick="handleLogout()">Logout</a>
+    <!-- <a href="registerlogin.html">Register/login</a> -->
 
+  </nav>
   <main>
     <h1>Book a Service</h1>
     <div class="booking-container">
-      <form id="bookingForm">
+      <form>
         <input type="text" placeholder="Full Name" required />
-        <input type="email" placeholder="Email Address" required />
         <input type="date" required />
         <input type="time" required />
         
@@ -39,13 +41,11 @@
   </main>
 
   <script>
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-      e.preventDefault(); 
-      window.location.href = 'thankyoub.html';
-    });
+    function handleLogout() {
+      // You can add logout logic here like clearing sessionStorage/localStorage
+      alert("You have been logged out."); // optional feedback to user
+      // The href will then take the user to registerlogin.html
+    }
   </script>
 </body>
 </html>
-
-
-

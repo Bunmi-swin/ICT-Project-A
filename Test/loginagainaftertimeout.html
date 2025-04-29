@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aged Care Login</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="js/scripts.js"></script>
 </head>
 <body>
   <nav class="nav">
@@ -21,33 +22,33 @@
       <h2>Login</h2>
       <input type="email" placeholder="Email" required />
       <input type="password" placeholder="Password" required />
-      <select required>
+      <select id="roleSelect" required>
         <option value="">Select Role</option>
         <option value="admin">Admin</option>
-        <option value="carer">Carer</option>
-        <option value="family">Family Member</option>
-      </select>
+        <option value="familymember">Family Member</option>
+        <option value="resident">Resident</option>
+    </select>
       <a href="#" style="float: right; font-size: 12px;">Forgot Password?</a>
       <button type="submit">Login</button>
     </form>
   </div>
 
-  <script>
+  <!-- <script>
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault(); 
 
       const role = document.querySelector('#loginForm select').value;
 
-      if (role === 'admin' || role === 'carer') {
+      if (role === 'admin' || role === 'familymember') {
         alert('Login successful! Redirecting to staff page...');
-        window.location.href = 'staff.html';
-      } else if (role === 'family') {
+        window.location.href = 'staffpage.html';
+      } else if (role === 'resident') {
         alert('Login successful! Redirecting to patient page...');
-        window.location.href = 'patient.html';
+        window.location.href = 'resident.html';
       } else {
         alert('Please select a valid role.');
       }
     });
-  </script>
+  </script> -->
 </body>
 </html>
