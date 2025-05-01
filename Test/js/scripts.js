@@ -36,11 +36,11 @@
         // Attach the login function to the form
         const loginForm = document.getElementById("loginForm");
         //console.log("loginForm:", loginForm); // Debugging statement
-        if (loginForm) {
-          loginForm.addEventListener("submit", login);
-        } else {
-          console.error("Element with id 'loginForm' not found in the DOM.");
-        }
+       // if (loginForm) {
+        //  loginForm.addEventListener("submit", async function (e) {
+      //  }); else {
+      //    console.error("Element with id 'loginForm' not found in the DOM.");
+       //}
       
         // Attach event listeners to the "Register" and "Login" links
         const switchToRegister = document.getElementById("switchToRegister");
@@ -98,51 +98,104 @@
     });
 
     
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginForm = document.getElementById("loginForm");
+      if (loginForm) {
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+      e.preventDefault(); // Prevent form submission
 
-    function login(event) {
-      event.preventDefault();
-    
       const inputEmail = document.getElementById("email").value.trim();
       const inputPassword = document.getElementById("password").value.trim();
-      const roleSelect = document.getElementById("roleSelect").value;
-    
-      console.log("Email entered:", inputEmail);
-      console.log("Password entered:", inputPassword);
-      console.log("Role selected:", roleSelect);
-    
-      const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    
-      const allUsers = [...users, ...storedUsers];
-    
-      const user = allUsers.find(
-        u => u.email === inputEmail && u.password === inputPassword && u.role === roleSelect
-      );
-    
-      if (!user) {
-        alert("Invalid email, password, or role.");
-        return;
-      }
-    
-      // Store role & username (or email if no username)
-      sessionStorage.setItem("role", user.role);
-      sessionStorage.setItem("username", user.username || user.email);
-    
-      // Log and redirect
-      alert("Login successful! Redirecting...");
-    
-      if (user.role === "admin") {
-        alert("Login successful! Redirecting to admin page...");
+      
+      console.log("Plain-text password (frontend):", inputPassword);
+
+      try {
+      const response = await fetch('http://localhost/ICT-Project-A/Test/api/login.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: inputEmail, password: inputPassword }),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+  }
+      
+    const result = await response.json();
+  if (result.status === 'success') {
+      alert(result.message);
+      
+        // Store the user's role and username in sessionStorage
+        sessionStorage.setItem("role", result.role);
+        sessionStorage.setItem("username", result.username);
+        // Redirect based on role
+        //const roleSelect = document.getElementById("roleSelect").value;
+      
+      if (result.role === "Admin") {
+        alert("Login successful! Redirecting to staff page...");
         window.location.href = "staffpage.html";
-      } else if (user.role === "familymember") {
-        alert("Login successful! Redirecting to family member page...");
+    } else if (result.role === "Family Member") {
+        alert("Login successful! Redirecting to carer page...");
         window.location.href = "familymember.html";
-      } else if (user.role === "resident") {
-        alert("Login successful! Redirecting to resident page...");
+      } else if (result.role === "Resident") {
+        alert("Login successful! Redirecting to patient page...");
         window.location.href = "resident.html";
       } else {
         alert("Unknown role. Please contact support.");
       }
-    }
+  } else {
+      alert(result.message);
+  }
+} catch (error){
+  console.error("Error during login:", error);
+  alert("An error eccoured. Please try again.")
+}
+});
+}});
+
+ // Old non-API/SQL Login
+//function login(event) {
+     // event.preventDefault();
+    
+     // const inputEmail = document.getElementById("email").value.trim();
+     // const inputPassword = document.getElementById("password").value.trim();
+     // const roleSelect = document.getElementById("roleSelect").value;
+    
+    //  console.log("Email entered:", inputEmail);
+    //  console.log("Password entered:", inputPassword);
+    //  console.log("Role selected:", roleSelect);
+    
+    //  const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+    
+    // const allUsers = [...users, ...storedUsers];
+    
+    //  const user = allUsers.find(
+    //    u => u.email === inputEmail && u.password === inputPassword && u.role === roleSelect
+    //  );
+    
+   //   if (!user) {
+    //    alert("Invalid email, password, or role.");
+    //    return;
+    //  }
+    
+      // Store role & username (or email if no username)
+    //  sessionStorage.setItem("role", user.role);
+    //  sessionStorage.setItem("username", user.username || user.email);
+    
+      // Log and redirect
+    //  alert("Login successful! Redirecting...");
+    
+   //   if (user.role === "admin") {
+   //     alert("Login successful! Redirecting to admin page...");
+   //     window.location.href = "staffpage.html";
+   //   } else if (user.role === "familymember") {
+   //     alert("Login successful! Redirecting to family member page...");
+   //     window.location.href = "familymember.html";
+   //   } else if (user.role === "resident") {
+   //     alert("Login successful! Redirecting to resident page...");
+   //     window.location.href = "resident.html";
+   //   } else {
+   //     alert("Unknown role. Please contact support.");
+   //   }
+   // }
     
 
       function switchrole(role){

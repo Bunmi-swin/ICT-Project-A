@@ -19,11 +19,11 @@
     const role = sessionStorage.getItem("role");
     // Define users and their roles:
 
-    const users = [
-      { email: "Calmmind@gmail.com", username: "Defender", role: "Staff", time: "2 years" },
-      { email: "Gogetter@outlook.com", username: "Racer", role: "Carer", time: "1 year" },
-      { email: "247Ready@gmail.com", username: "Battler", role: "User", time: "1 year"}
-    ];
+   // const users = [
+   //   { email: "Calmmind@gmail.com", username: "Defender", role: "Staff", time: "2 years" },
+   //   { email: "Gogetter@outlook.com", username: "Racer", role: "Carer", time: "1 year" },
+   //   { email: "247Ready@gmail.com", username: "Battler", role: "User", time: "1 year"}
+   // ];
 
     function toggleForms() {
       document.getElementById("loginForm").classList.toggle("hidden");
@@ -67,60 +67,71 @@
 
     
 
-      function login(event) {
-        event.preventDefault(); // Prevent form submission
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+        e.preventDefault(); // Prevent form submission
       
         const inputEmail = document.getElementById("email").value.trim();
         const inputPassword = document.getElementById("password").value.trim();
-        const roleSelect = document.getElementById("roleSelect").value;
+        //password_hash()
+        
       
-        console.log("Email entered:", inputEmail);
-        console.log("Password entered:", inputPassword);
-        console.log("Role selected:", roleSelect);
-      
-        // Find the user by email
-        const user = users.find(u => u.email === inputEmail);
-        console.log("User found:", user);
-      
-        // Simulate password validation
-        const validPasswords = { Defender: "*Sh^eld*", Racer: "Speed64", Battler: "Triumph@nt" };
-      
-        // Check if the email is valid
-        if (!user) {
-          alert("Invalid email.");
-          return;
-        }
-      
-        // Check if the password is correct
-        if (validPasswords[user.username] !== inputPassword) {
-          alert("Invalid password.");
-          return;
-        }
-      
-        // Check if the selected role matches the user's role
-        if (user.role !== roleSelect) {
-          alert("Selected role does not match your account role.");
-          return;
-        }
-      
-        // Store the user's role and username in sessionStorage
-        sessionStorage.setItem("role", user.role);
-        sessionStorage.setItem("username", user.username);
-      
-        // Redirect based on role
-        if (user.role === "Staff") {
+        const response = await fetch('http://localhost/ICT-Project-A/api/login.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+      });
+
+      const result = await response.json();
+    if (result.status === 'success') {
+        alert(result.message);
+        
+                // Store the user's role and username in sessionStorage
+          sessionStorage.setItem("role", user.role);
+          sessionStorage.setItem("username", user.username);
+          // Redirect based on role
+          //const roleSelect = document.getElementById("roleSelect").value;
+        
+        if (result.role === "Staff") {
           alert("Login successful! Redirecting to staff page...");
           window.location.href = "staff.html";
-        } else if (user.role === "Carer") {
+      } else if (result.role === "Carer") {
           alert("Login successful! Redirecting to carer page...");
           window.location.href = "carer.html";
-        } else if (user.role === "User") {
+        } else if (result.role === "User") {
           alert("Login successful! Redirecting to patient page...");
           window.location.href = "patient.html";
         } else {
           alert("Unknown role. Please contact support.");
         }
-      }
+    } else {
+        alert(result.message);
+    }
+  });
+     //   console.log("Email entered:", inputEmail);
+     //   console.log("Password entered:", inputPassword);
+     // console.log("Role selected:", roleSelect);
+      
+        // Find the user by email
+     //   console.log("User found:", user);
+      
+      
+        // Check if the email is valid
+    //    if (!user) {
+    //      alert("Invalid email.");
+    //      return;
+    //    }
+      
+        // Check if the password is correct
+   //     if (validPasswords[user.username] !== inputPassword) {
+   //       alert("Invalid password.");
+   //       return;
+   //     }
+      
+        // Check if the selected role matches the user's role
+   //     if (user.role !== roleSelect) {
+   //       alert("Selected role does not match your account role.");
+   //       return;
+   //     }
 
       function switchrole(role){
         if (role == "Staff"){
