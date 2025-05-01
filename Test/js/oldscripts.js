@@ -75,7 +75,7 @@
         //password_hash()
         
       
-        const response = await fetch('http://localhost/ICT-Project-A/api/login.php', {
+        const response = await fetch('http://localhost/ICT-Project-A/Test/api/login.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
