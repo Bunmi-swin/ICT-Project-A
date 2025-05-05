@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="universalstyle.css" rel="stylesheet" type="text/css">
+
+  <title>Staff Page</title>
+  <style>
+    body {
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 2000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h1, h2 {
+      color: #2c3e50;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+      margin-top: 40px;
+    }
+
+    .section {
+      margin-top: 20px;
+    }
+
+    .profile-photo {
+      float: right;
+      width: 200px;
+      height: 210px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 2px solid #ddd;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .info-item {
+      background-color: #f1f5f9;
+      padding: 10px 15px;
+      border-radius: 6px;
+    }
+
+    .info-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #555;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f3f4f6;
+      text-align: left;
+    }
+
+    .clear {
+      clear: both;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <a class="active" href="homepage.html">Home</a>
+    <a href="about_us.html">About Us</a>
+    <a href="service.html">Service</a>
+    <a href="contact_us.html">Contact Us</a>
+    <!-- <a href="booking_button.html">Booking Button</a> -->
+    <a href="registerlogin.html" onclick="handleLogout()">Logout</a>
+  </nav>
+
+  <div class="container">
+    <h1>Staff Page</h1>
+
+    <h2>Staff Profile</h2>
+    <img src="staffprofile.jpg" alt="Staff Photo" class="profile-photo" />
+    <div class="info-grid">
+      <div class="info-item"><strong>Full Name</strong>Emily Thompson</div>
+      <div class="info-item"><strong>Job Title / Role</strong>Registered Nurse</div>
+      <div class="info-item"><strong>Email</strong>emily.thompson@carehome.com</div>
+      <div class="info-item"><strong>Phone Number</strong>0401 234 567</div>
+    </div>
+    <div class="clear"></div>
+
+    <h2>Employment Details</h2>
+    <div class="info-item"><strong>Role and Responsibilities</strong>Provides medical care, administers medication, and monitors resident health and wellbeing. Coordinates with carers and doctors for treatment plans.</div>
+    <div class="info-item"><strong>Salary Details</strong>$80,000 per annum</div>
+    <div class="info-item"><strong>Emergency Contact Information</strong>James Thompson (Brother) - 0401 987 654</div>
+
+    <h2>Staff Schedule / Availability</h2>
+    <table>
+      <tr>
+        <th>Day</th>
+        <th>Shift Time</th>
+      </tr>
+      <tr>
+        <td>Monday</td>
+        <td>9:00 AM - 5:00 PM</td>
+      </tr>
+      <tr>
+        <td>Tuesday</td>
+        <td>9:00 AM - 5:00 PM</td>
+      </tr>
+      <tr>
+        <td>Wednesday</td>
+        <td>Overnight (10:00 PM - 6:00 AM)</td>
+      </tr>
+      <tr>
+        <td>Thursday</td>
+        <td>9:00 AM - 5:00 PM</td>
+      </tr>
+      <tr>
+        <td>Friday</td>
+        <td>9:00 AM - 1:00 PM</td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="monitoringstaffactivity">
+    
+  </div>
+
+  <script>
+    function handleLogout() {
+      // You can add logout logic here like clearing sessionStorage/localStorage
+      alert("You have been logged out."); // optional feedback to user
+      // The href will then take the user to registerlogin.html
+    }
+  </script>
+
+    <script src="timeout.js"></script>
+
+</body>
+</html>

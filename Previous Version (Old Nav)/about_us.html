@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="ICTProject">
+    <link href="universalstyle.css" rel="stylesheet" type="text/css">
+    <script src="js/scripts.js"></script>
+    <title>About Us - Age Care Facility</title>
+
+    <style>
+        .about-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f4f9f9;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-container h1 {
+            font-size: 2em;
+            color: #2c3e50;
+        }
+
+        .about-container p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .location {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+
+        .staff-section {
+            margin-top: 40px;
+        }
+
+        .staff-section h2 {
+            color: #2c3e50;
+        }
+
+        .filter {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+
+        .staff-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .staff-table th,
+        .staff-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .staff-table th {
+            background-color: #e3f1f1;
+        }
+    </style>
+
+    <script>
+        function filterStaff() {
+            const filter = document.getElementById("serviceFilter").value.toLowerCase();
+            const rows = document.querySelectorAll(".staff-table tbody tr");
+
+            rows.forEach(row => {
+                const category = row.getAttribute("data-category").toLowerCase();
+                row.style.display = (filter === "all" || category === filter) ? "" : "none";
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+    <nav class="nav">
+        <a class="active" href="homepage.html">Home</a>
+        <a href="about_us.html">About Us</a>
+        <a href="service.html">Service</a>
+        <a href="contact_us.html">Contact Us </a>
+        <a href="booking_button.html">Book Services</a>
+        <a href="registerlogin.html">Register/login</a>
+    </nav>
+
+    <div class="about-container">
+
+        <h1>Who Are We?</h1>
+
+        <p>
+            At our aged care facility, we provide 24/7 compassionate care to all individuals—regardless of age, gender, or background.
+            We are an inclusive and supportive environment where everyone is welcome and respected.
+        </p>
+
+        <p>
+            Our experienced and highly trained staff are committed to ensuring every resident receives the best quality care. We offer a wide range
+            of personalized services to support daily living and improve overall wellbeing. With over 10,000 people supported each year, 
+            our facility is a trusted name in aged care.
+        </p>
+
+        <p>
+            Become part of our growing and supportive community. If you haven’t registered yet, we invite you to sign up today and start your journey with us.
+        </p>
+
+        <p class="location">
+            Located at: Avenue Street, Melbourne, VIC 3000
+        </p>
+
+        <div class="staff-section">
+            <h2>Our Dedicated Staff</h2>
+
+            <label class="filter" for="serviceFilter">Filter by Service:</label>
+            <select id="serviceFilter" onchange="filterStaff()">
+                <option value="all">All</option>
+                <option value="in-home care">In-Home Care</option>
+                <option value="residential care">Residential Care</option>
+                <option value="medical checkup">Medical Checkup</option>
+            </select>
+
+            <table class="staff-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Service Category</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-category="in-home care">
+                        <td>Emily Johnson</td>
+                        <td>Senior Caregiver</td>
+                        <td>In-Home Care</td>
+                        <td>emily@gmail.com</td>
+                    </tr>
+                    <tr data-category="residential care">
+                        <td>Mark Allen</td>
+                        <td>Facility Manager</td>
+                        <td>Residential Care</td>
+                        <td>mark@gmail.com</td>
+                    </tr>
+                    <tr data-category="medical checkup">
+                        <td>Dr. Sarah Lee</td>
+                        <td>General Practitioner</td>
+                        <td>Medical Checkup</td>
+                        <td>sarah@gmail.com</td>
+                    </tr>
+                    <tr data-category="in-home care">
+                        <td>David Smith</td>
+                        <td>Home Nurse</td>
+                        <td>In-Home Care</td>
+                        <td>david@gmail.com</td>
+                    </tr>
+                    <tr data-category="residential care">
+                        <td>Linda Brown</td>
+                        <td>Support Coordinator</td>
+                        <td>Residential Care</td>
+                        <td>linda@gmail.com</td>
+                    </tr>
+                    <tr data-category="medical checkup">
+                        <td>Dr. Kevin Wu</td>
+                        <td>Specialist Consultant</td>
+                        <td>Medical Checkup</td>
+                        <td>kevin@gmail.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

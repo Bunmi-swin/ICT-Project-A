@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="universalstyle.css" rel="stylesheet" type="text/css">
+
+  <title>Resident Page</title>
+  <style>
+    body {
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 2000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h1, h2 {
+      color: #2c3e50;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+      margin-top: 40px;
+    }
+
+    .section {
+      margin-top: 20px;
+    }
+
+    .profile-photo {
+      float: right;
+      width: 200px;
+      height: 210px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 2px solid #ddd;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .info-item {
+      background-color: #f1f5f9;
+      padding: 10px 15px;
+      border-radius: 6px;
+    }
+
+    .info-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #555;
+    }
+
+    .notes {
+      background-color: #fef9c3;
+      padding: 10px;
+      border-left: 4px solid #facc15;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f3f4f6;
+      text-align: left;
+    }
+
+    .clear {
+      clear: both;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <a class="active" href="homepage.html">Home</a>
+    <a href="about_us.html">About Us</a>
+    <a href="service.html">Service</a>
+    <a href="contact_us.html">Contact Us </a>
+    <a href="bookingwithoutlogin.html">Book Services</a>
+    <a href="registerlogin.html" onclick="handleLogout()">Logout</a>
+  </nav>
+  <div class="container">
+    <h1>Resident Page</h1>
+
+    <h2>Resident Information</h2>
+    <img src="residentprofile.jpg" alt="Profile Photo" class="profile-photo" />
+    <div class="info-grid">
+      <div class="info-item"><strong>Full Name</strong>John Doe</div>
+      <div class="info-item"><strong>Date of Birth / Age</strong>12 March 1945 / 79</div>
+      <div class="info-item"><strong>Gender</strong>Male</div>
+      <div class="info-item"><strong>Contact Details</strong>0412 345 678</div>
+      <div class="info-item"><strong>Emergency Contacts</strong>Jane Doe (Daughter) - 0412 000 111</div>
+      <div class="info-item"><strong>Address</strong>123 Homecare Lane, Melbourne VIC</div>
+    </div>
+    <div class="clear"></div>
+
+    <h2>Care Plan Details</h2>
+    <div class="info-item"><strong>Summary</strong>Requires assistance with dressing, eating, hygiene, and mobility.</div>
+    <div class="info-item"><strong>Assigned Carers</strong>Emily Smith, Robert Johnson</div>
+    <div class="notes"><strong>Carer Notes:</strong> John prefers morning showers and enjoys reading after lunch. Needs encouragement to eat full meals.</div>
+
+    <h2>Medication Requirements</h2>
+    <table>
+      <tr>
+        <th>Medication</th>
+        <th>Dosage</th>
+        <th>Special Instructions</th>
+      </tr>
+      <tr>
+        <td>Amlodipine</td>
+        <td>5mg daily</td>
+        <td>Take in the morning with food</td>
+      </tr>
+      <tr>
+        <td>Metformin</td>
+        <td>500mg twice daily</td>
+        <td>Avoid taking with dairy</td>
+      </tr>
+    </table>
+
+    <h2>Medical History / Health Info</h2>
+    <div class="info-item"><strong>Ongoing Conditions</strong>Hypertension, Type 2 Diabetes</div>
+    <div class="info-item"><strong>Allergies</strong>Penicillin</div>
+    <div class="info-item"><strong>Accessibility Requirements</strong>Wheelchair access, shower seat</div>
+    <div class="info-item"><strong>Bookings</strong>Next checkup: 15 April 2025 with Dr. Chan</div>
+
+    <h2>Facility Details</h2>
+    <div class="info-grid">
+      <div class="info-item"><strong>Room Number</strong>204-B</div>
+      <div class="info-item"><strong>Room Status</strong>Occupied</div>
+      <div class="info-item"><strong>Assigned Utilities</strong>Medical bed, Emergency bell, Oxygen supply</div>
+      <div class="info-item"><strong>Reservation History</strong>Admitted: Jan 2024, Previously in Room 101-A</div>
+    </div>
+  </div>
+
+  <script>
+    function handleLogout() {
+      // You can add logout logic here like clearing sessionStorage/localStorage
+      alert("You have been logged out."); // optional feedback to user
+      // The href will then take the user to registerlogin.html
+    }
+  </script>
+
+  <script src="timeout.js"></script>
+
+</body>
+</html>
