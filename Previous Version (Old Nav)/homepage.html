@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="ICTProject, Aged Care, Management System">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aged Care Facility - Home</title>
+    <style>
+        /* Navigation bar container */
+        nav {
+            display: flex; /* Ensures links are aligned in a row */
+            justify-content: space-around; /* Adjust spacing between links */
+            align-items: center; /* Vertically center the links */
+            border: solid;
+            border-width: 8px;
+            border-color: dimgray;
+            background-color: lightcyan;
+            padding: 10px; 
+            margin: 0; 
+            }
+            
+            /* Navigation links */
+            nav a {
+            font-size: 18px; /* Adjust font size */
+            padding: 5px 15px; /* Add padding around the text */
+            text-decoration: none; /* Remove underline */
+            color: black; /* Text color */
+            font-weight: bold;
+            border-width: 8px; /* Adjust border width */
+            }
+            
+            nav a:last-child {
+            border-right: none; /* Remove border from the last link */
+            }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 40px;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .text-section {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .image-section {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .image-section img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Accessibility Options -->
+    <div id="accessibility-controls" style="padding: 10px; background-color: #f0f0f0; text-align: right;">
+        <button onclick="toggleAccessibilityMenu()">Accessibility</button>
+        <div id="accessibility-menu" style="display: none; margin-top: 10px;">
+            <button onclick="increaseTextSize()">A+</button>
+            <button onclick="decreaseTextSize()">A-</button>
+            <button onclick="toggleDarkMode()">Dark Mode</button>
+            <button onclick="resetDefaults()">Set to Default</button>
+        </div>
+    </div>
+
+
+    <nav class="nav">
+        <a class="active" href="homepage.html">Home</a>
+        <a href="about_us.html">About Us</a>
+        <a href="service.html">Services</a>
+        <a href="contact_us.html">Contact Us</a>
+        <a href="booking_button.html">Book Services</a>
+        <a href="registerlogin.html">Register/Login</a>
+    </nav>
+
+    <h1>Welcome to Our Aged Care Facility</h1>
+
+    <div class="container">
+        <div class="text-section">
+            <p>
+                Our Aged Care Management System is dedicated to providing high-quality, 24/7 support tailored to the needs of elderly individuals. We are committed to enhancing the quality of life through compassionate care and a wide range of essential services, including:
+            </p>
+            <ul>
+                <li>Meal assistance</li>
+                <li>Personal hygiene and showering</li>
+                <li>Housekeeping and tidying</li>
+                <li>Dressing support</li>
+                <li>And much more!</li>
+            </ul>
+            <p>
+                We prioritize respect, dignity, and privacy for all our residents. All personal and medical data is kept strictly confidential and secure. Our system efficiently manages care plans, staff responsibilities, health and safety protocols, and administrative tasks such as billing, inventory, and service coordination.
+            </p>
+        </div>
+
+        <div class="image-section">
+            <img src="agedcare.jpg" alt="Elderly care">
+        </div>
+    </div>
+    
+    <script src="accessibility.js"></script>
+    
+    
+
+</body>
+
+</html>

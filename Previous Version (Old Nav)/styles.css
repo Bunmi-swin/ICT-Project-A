@@ -1,0 +1,118 @@
+/* Navigation bar container */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: solid;
+  border-width: 8px;
+  border-color: dimgray;
+  background-color: lightcyan;
+  padding: 10px;
+  margin: 0;
+  width: 100%;
+}
+
+/* Navigation links */
+nav a {
+  font-size: 18px;
+  padding: 5px 15px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  border-width: 8px;
+}
+
+nav a:last-child {
+  border-right: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Form container */
+.container {
+  background: lightblue;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 900px; /* wider to support 2-column */
+  margin-top: 100px;
+}
+
+h2, h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input and select styling */
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* Button styling */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #00a510;
+}
+
+.switch {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.switch a {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.switch a:hover {
+  text-decoration: underline;
+}
+
+.hidden {
+  display: none;
+}
+
+/* NEW: Form grid for 2-column layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- <link href="universalstyle.css" rel="stylesheet" type="text/css"> -->
+
+  <title>Family Member Portal</title>
+  <style>
+    /* Navigation bar container */
+    nav {
+        display: flex; /* Ensures links are aligned in a row */
+        justify-content: space-around; /* Adjust spacing between links */
+        align-items: center; /* Vertically center the links */
+        border: solid;
+        border-width: 8px;
+        border-color: dimgray;
+        background-color: lightcyan;
+        padding: 10px; 
+        margin: 0; 
+    }
+    
+    /* Navigation links */
+    nav a {
+        font-size: 18px; /* Adjust font size */
+        padding: 5px 15px; /* Add padding around the text */
+        text-decoration: none; /* Remove underline */
+        color: black; /* Text color */
+        font-weight: bold;
+        border-width: 8px; /* Adjust border width */
+    }
+    
+    nav a:last-child {
+        border-right: none; /* Remove border from the last link */
+    }
+
+    body {
+      background-color: #f7f9fc;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    .container {
+      max-width: 2000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+      color: #2c3e50;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+      margin-top: 40px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+    p {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    table, tr, th, td {
+        border: solid black;
+        background-color: antiquewhite;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .info-item {
+      background-color: #f1f5f9;
+      padding: 10px 15px;
+      border-radius: 6px;
+    }
+
+    .info-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #555;
+    }
+
+    .profile-photo {
+      float: right;
+      width: 200px;
+      height: 210px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 2px solid #ddd;
+    }
+
+    .notes {
+      background-color: #fef9c3;
+      padding: 10px;
+      border-left: 4px solid #facc15;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f3f4f6;
+      text-align: left;
+    }
+
+    .clear {
+      clear: both;
+    }
+
+    /* Chat Styles */
+    #chat-section {
+      margin-top: 50px;
+      background: #f4f6f8;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #chat-section h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    #chat-box {
+      border: 1px solid #ccc;
+      height: 300px;
+      overflow-y: scroll;
+      padding: 10px;
+      background: #fff;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+
+    .msg {
+      margin: 6px 0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      max-width: 70%;
+      word-wrap: break-word;
+    }
+
+    .sent {
+      background: #d1e7dd;
+      text-align: right;
+      margin-left: auto;
+    }
+
+    .received {
+      background: #f8d7da;
+      text-align: left;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    #message {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+
+    #send-btn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    #send-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+    <nav class="nav">
+        <a class="active" href="homepage.html">Home</a>
+        <a href="about_us.html">About Us</a>
+        <a href="service.html">Service</a>
+        <a href="contact_us.html">Contact Us </a>
+        <a href="bookingwithoutlogin.html">Book Services</a>
+        <a href="registerlogin.html" onclick="handleLogout()">Logout</a>
+    </nav>
+
+  <div class="container">
+    <h1>Welcome, Jane Doe</h1>
+    <p>This is the family portal. Below are the current care details for your loved one.</p>
+
+    <h2>Resident Information</h2>
+    <img src="residentprofile.jpg" alt="Resident Photo" class="profile-photo" />
+    <div class="info-grid">
+      <div class="info-item"><strong>Full Name</strong>John Doe</div>
+      <div class="info-item"><strong>Age</strong>79</div>
+      <div class="info-item"><strong>Gender</strong>Male</div>
+      <div class="info-item"><strong>Contact Info</strong>0412 345 678</div>
+      <div class="info-item"><strong>Address</strong>123 Homecare Lane, Melbourne</div>
+    </div>
+    <div class="clear"></div>
+
+    <h2>Current Care Plan</h2>
+    <div class="info-item"><strong>Support Provided</strong>Assistance with dressing, eating, hygiene, and mobility.</div>
+    <div class="info-item"><strong>Assigned Carers</strong>Emily Smith, Robert Johnson</div>
+    <div class="notes"><strong>Notes:</strong> Enjoys afternoon reading. Needs encouragement during mealtime. Prefers morning showers.</div>
+
+    <h2>Medication</h2>
+    <table>
+      <tr>
+        <th>Medication</th>
+        <th>Dosage</th>
+        <th>Instructions</th>
+      </tr>
+      <tr>
+        <td>Amlodipine</td>
+        <td>5mg daily</td>
+        <td>Take in the morning with food</td>
+      </tr>
+      <tr>
+        <td>Metformin</td>
+        <td>500mg twice daily</td>
+        <td>Avoid dairy when taking</td>
+      </tr>
+    </table>
+
+    <h2>Medical Information</h2>
+    <div class="info-grid">
+      <div class="info-item"><strong>Conditions</strong>Hypertension, Type 2 Diabetes</div>
+      <div class="info-item"><strong>Allergies</strong>Penicillin</div>
+      <div class="info-item"><strong>Accessibility</strong>Wheelchair access, shower seat</div>
+      <div class="info-item"><strong>Next Appointment</strong>15 April 2025 with Dr. Chan</div>
+    </div>
+
+    <h2>Room Details</h2>
+    <div class="info-grid">
+      <div class="info-item"><strong>Room Number</strong>204-B</div>
+      <div class="info-item"><strong>Status</strong>Occupied</div>
+      <div class="info-item"><strong>Utilities</strong>Medical bed, Emergency bell, Oxygen supply</div>
+      <div class="info-item"><strong>History</strong>Admitted Jan 2024, previously in 101-A</div>
+    </div>
+
+    <!-- Chat Section -->
+    <div id="chat-section">
+      <h2>Chat With Us</h2>
+
+      <div id="chat-box"></div>
+
+      <div class="input-group">
+        <input type="text" id="message" placeholder="Type your message here" />
+        <button id="send-btn" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function handleLogout() {
+      alert("You have been logged out.");
+      // Add any session clearing if needed
+    }
+
+    const currentUser = "You";
+
+    function loadMessages() {
+      fetch("get_messages.php")
+        .then(response => response.json())
+        .then(data => {
+          const chatBox = document.getElementById("chat-box");
+          chatBox.innerHTML = "";
+
+          data.forEach(msg => {
+            const div = document.createElement("div");
+            div.classList.add("msg");
+            div.classList.add(msg.sender === currentUser ? "sent" : "received");
+            div.innerText = `${msg.sender}: ${msg.message}`;
+            chatBox.appendChild(div);
+          });
+
+          chatBox.scrollTop = chatBox.scrollHeight;
+        });
+    }
+
+    function sendMessage() {
+      const message = document.getElementById("message").value.trim();
+      if (!message) return;
+
+      fetch("send_message.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `sender=${encodeURIComponent(currentUser)}&message=${encodeURIComponent(message)}`
+      })
+      .then(() => {
+        document.getElementById("message").value = "";
+        loadMessages();
+      });
+    }
+
+    setInterval(loadMessages, 2000);
+    loadMessages();
+  </script>
+
+    <script src="timeout.js"></script>
+
+</body>
+</html>
