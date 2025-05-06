@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="keywords" content="ICTProject, Aged Care, Management System">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<script src="js/scripts.js"></script> -->
     <title>About Us - Age Care Facility</title>
     <link rel="stylesheet" href="universalstyle.css">
 
@@ -42,6 +41,9 @@
 
         .staff-section h2 {
             color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
         }
 
         .filter {
@@ -58,12 +60,30 @@
         .staff-table th,
         .staff-table td {
             border: 1px solid #ccc;
-            padding: 10px;
+            padding: 12px;
             text-align: left;
         }
 
         .staff-table th {
             background-color: #e3f1f1;
+            color: #2c3e50;
+        }
+
+        .staff-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .staff-table tr:hover {
+            background-color: #e3f1f1;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
         }
     </style>
 
@@ -76,6 +96,28 @@
                 const category = row.getAttribute("data-category").toLowerCase();
                 row.style.display = (filter === "all" || category === filter) ? "" : "none";
             });
+        }
+        
+        function searchStaff() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById("staffTable");
+            const rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                let found = false;
+                const cells = rows[i].getElementsByTagName("td");
+                
+                for (let j = 0; j < cells.length; j++) {
+                    const cellText = cells[j].textContent || cells[j].innerText;
+                    if (cellText.toLowerCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+                
+                rows[i].style.display = found ? "" : "none";
+            }
         }
     </script>
 </head>
@@ -95,9 +137,10 @@
     <!-- Sidebar Navigation -->
     <div id="mySidebar" class="sidebar">
         <span class="close-btn" onclick="closeNav()" title="Leave Menu">&times;</span>
-        <a class="active" href="homepage.html">Home</a>
-        <a href="about_us.html">About Us</a>
+        <a href="homepage.html">Home</a>
+        <a class="active" href="about_us.html">About Us</a>
         <a href="service.html">Services</a>
+        <a href="inventory.html">Inventory</a>
         <a href="contact_us.html">Contact Us</a>
         <a href="booking_button.html">Book Services</a>
         <a href="registerlogin.html">Register/Login</a>
@@ -130,7 +173,7 @@
         </p>
 
         <p>
-            Become part of our growing and supportive community. If you haven’t registered yet, we invite you to sign up today and start your journey with us.
+            Become part of our growing and supportive community. If you haven't registered yet, we invite you to sign up today and start your journey with us.
         </p>
 
         <p class="location">
@@ -139,6 +182,8 @@
 
         <div class="staff-section">
             <h2>Our Dedicated Staff</h2>
+            
+            <input type="text" id="searchInput" class="search-bar" onkeyup="searchStaff()" placeholder="Search for staff members...">
 
             <label class="filter" for="serviceFilter">Filter by Service:</label>
             <select id="serviceFilter" onchange="filterStaff()">
@@ -148,7 +193,7 @@
                 <option value="medical checkup">Medical Checkup</option>
             </select>
 
-            <table class="staff-table">
+            <table class="staff-table" id="staffTable">
                 <thead>
                     <tr>
                         <th>Name</th>
