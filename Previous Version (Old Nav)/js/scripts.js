@@ -110,7 +110,7 @@
       console.log("Plain-text password (frontend):", inputPassword);
 
       try {
-      const response = await fetch('http://localhost/ICT-Project-A/Test/api/login.php', {
+      const response = await fetch('http://localhost/ICT-Project-A/Previous Version (Old Nav)/api/login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: inputEmail, password: inputPassword }),
