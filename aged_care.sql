@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2025 at 06:27 AM
+-- Generation Time: May 10, 2025 at 12:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,8 +34,15 @@ CREATE TABLE `appointments table` (
   `appointment_date` int(11) NOT NULL,
   `time_slot` int(11) NOT NULL,
   `status` int(11) NOT NULL,
-  `assigned_staff_id` int(11) NOT NULL
+  `assigned_staff_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appointments table`
+--
+
+INSERT INTO `appointments table` (`appointment_id`, `resident_id`, `service_id`, `appointment_date`, `time_slot`, `status`, `assigned_staff_id`) VALUES
+(0, 1, 2, 2025, 21, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -85,9 +92,20 @@ CREATE TABLE `messages table` (
   `message_id` int(11) NOT NULL,
   `sender_id` int(11) NOT NULL,
   `recipient_id` int(11) NOT NULL,
-  `message_content` int(11) NOT NULL,
-  `timestamp` int(11) NOT NULL
+  `message_content` text NOT NULL,
+  `timestamp` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `messages table`
+--
+
+INSERT INTO `messages table` (`message_id`, `sender_id`, `recipient_id`, `message_content`, `timestamp`) VALUES
+(0, 0, 0, '0', '0000-00-00 00:00:00.000000'),
+(0, 0, 0, 'cdsDfv', '0000-00-00 00:00:00.000000'),
+(0, 0, 0, 'ASDaS', '0000-00-00 00:00:00.000000'),
+(0, 0, 0, 'sdsds', '0000-00-00 00:00:00.000000'),
+(0, 0, 0, 'fgf', '2025-05-10 08:58:30.000000');
 
 -- --------------------------------------------------------
 
