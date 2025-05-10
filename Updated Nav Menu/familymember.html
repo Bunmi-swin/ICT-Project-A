@@ -516,19 +516,25 @@ body {
     }
 
     function sendMessage() {
-      const message = document.getElementById("message").value.trim();
-      if (!message) return;
+  const message = document.getElementById("message").value.trim();
+  if (!message) return;
 
-      fetch("send_message.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `sender=${encodeURIComponent(currentUser)}&message=${encodeURIComponent(message)}`
-      })
-      .then(() => {
-        document.getElementById("message").value = "";
-        loadMessages();
-      });
-    }
+  // Add message to chat box
+    const chatBox = document.getElementById('chat-box');
+    const msgDiv = document.createElement('div');
+    msgDiv.textContent = message;
+    chatBox.appendChild(msgDiv);
+    
+  fetch("http://localhost/Updated%20Nav%20Menu/api/send_message.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `sender=${encodeURIComponent(currentUser)}&recipient=Admin&message=${encodeURIComponent(message)}`
+  })
+  .then(() => {
+    document.getElementById("message").value = "";
+    loadMessages();
+  });
+}
 
     setInterval(loadMessages, 2000);
     loadMessages();
