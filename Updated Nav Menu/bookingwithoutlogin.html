@@ -255,19 +255,19 @@ body {
   <main>
     <h1>Book a Service</h1>
     <div class="booking-container">
-      <form>
-        <input type="text" placeholder="Full Name" required />
-        <input type="date" required />
-        <input type="time" required />
+      <form id="bookingForm">
+        <input type="text" id="full_name" name="full_name" placeholder="Full Name" required />
+        <input type="date" id="appointment_date" name="appointment_date" required />
+        <input type="time" id="time_slot" name="time_slot" required />
         
-        <select required>
+        <select id="service_id" name="service_id" required>
           <option value="">Select Service</option>
-          <option value="in-home-care">In-home Care</option>
-          <option value="residential-care">Residential Care</option>
-          <option value="medical-checkup">Medical Check-up</option>
+          <option value="1">In-home Care</option>
+          <option value="2">Residential Care</option>
+          <option value="3">Medical Check-up</option>
         </select>
 
-        <textarea placeholder="Additional notes..."></textarea>
+        <textarea id="notes" name="notes" placeholder="Additional notes..."></textarea>
         <button type="submit">Book Now</button>
       </form>
     </div>
@@ -282,6 +282,7 @@ body {
   </script>
     <script src="accessibility.js"></script>
     <script src="js/sidebar-navigation.js"></script>
+    <script src="js/booking.js"></script>
     <script src="timeout.js"></script>
 </body>
 </html>
