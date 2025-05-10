@@ -5,17 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aged Care Login</title>
   <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="universalstyle.css"/>
+
   <script src="js/scripts.js"></script>
 </head>
+
 <body>
-  <nav class="nav">
-    <a class="active" href="homepage.html">Home</a>
-    <a href="about_us.html">About Us</a>
-    <a href="service.html">Service</a>
-    <a href="contact_us.html">Contact Us</a>
-    <a href="booking_button.html">Book Services</a>
-    <a href="loginagainaftertimeout.html">Login</a>
-  </nav>
+  <!-- Menu Button -->
+    <div class="menu-btn" onclick="toggleNav()">
+      <span></span>
+      <span></span>
+      <span></span>
+  </div>
+  
+  <!-- Overlay -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Sidebar Navigation -->
+  <div id="mySidebar" class="sidebar">
+      <span class="close-btn" onclick="closeNav()" title="Leave Menu">&times;</span>
+      <a class="active" href="homepage.html">Home</a>
+      <a href="about_us.html">About Us</a>
+      <a href="service.html">Services</a>
+      <a href="contact_us.html">Contact Us</a>
+      <a href="booking_button.html">Book Services</a>
+      <a href="loginagainaftertimeout.html">Login</a>
+  </div>
+
+  <!-- Accessibility Options -->
+  <div id="accessibility-controls">
+      <button onclick="toggleAccessibilityMenu()">Accessibility</button>
+      <div id="accessibility-menu" style="display: none; margin-top: 10px;">
+          <button onclick="increaseTextSize()">A+</button>
+          <button onclick="decreaseTextSize()">A-</button>
+          <button onclick="toggleDarkMode()">Dark Mode</button>
+          <button onclick="resetDefaults()">Set to Default</button>
+      </div>
+  </div>
 
   <div class="container">
     <form id="loginForm">
@@ -50,5 +76,8 @@
       }
     });
   </script> -->
+
+  <script src="accessibility.js"></script>
+    <script src="js/sidebar-navigation.js"></script>
 </body>
 </html>
