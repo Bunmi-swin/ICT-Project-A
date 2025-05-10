@@ -6,9 +6,24 @@
   <title>Aged Care Login & Register</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="universalstyle.css"/>
+  <link href="sitepath.css" rel="stylesheet" type="text/css">
   <script src="js/scripts.js"></script>
 </head>
+
+<style>
+    .sitepath {
+    align-self: flex-start; /* Override centering */
+    width: 100%;            /* Stretch full width */
+    text-align: left;       /* Align text to the left */
+    box-sizing: border-box;
+}
+</style>
+
 <body>
+    <div class="sitepath">
+        <a href="homepage.html">Home</a> &gt; <a href="registerlogin.html">Register/Login</a>
+    </div>
+
     <!-- Menu Button -->
     <div class="menu-btn" onclick="toggleNav()">
       <span></span>
@@ -25,7 +40,6 @@
       <a class="active" href="homepage.html">Home</a>
       <a href="about_us.html">About Us</a>
       <a href="service.html">Services</a>
-      <a href="Inventory.html">Inventory</a>
       <a href="contact_us.html">Contact Us</a>
       <a href="booking_button.html">Book Services</a>
       <a href="registerlogin.html">Register/Login</a>
@@ -43,7 +57,7 @@
   </div>
 
 
-    <div class="container">
+    <div class="form-container">
         <form id="loginForm">
         <h2>Login</h2>
         <input type="email" id="email" placeholder="Email" required />
@@ -98,8 +112,6 @@
 
         <select id="roleSelect" required>
             <option value="">Select Role</option>
-            <option value="admin">Admin</option>
-            <option value="familymember">Family Member</option>
             <option value="resident">Resident</option>
         </select>
 
