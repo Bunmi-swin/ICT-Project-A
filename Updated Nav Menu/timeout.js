@@ -2,10 +2,10 @@
 window.addEventListener("DOMContentLoaded", () => {
   // Create the overlay HTML
   const overlay = document.createElement("div");
-  overlay.className = "overlay";
+  overlay.className = "timeout-overlay";
   overlay.id = "timeoutOverlay";
   overlay.innerHTML = `
-    <div class="popup">
+    <div class="timeout-popup">
       <p>You have been logged out due to inactivity.</p>
       <button id="loginRedirectBtn">Login Again</button>
     </div>
@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Add styles for overlay and popup
   const style = document.createElement("style");
   style.textContent = `
-    .overlay {
+    .timeout-overlay {
       position: fixed;
       top: 0;
       left: 0;
@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", () => {
       z-index: 1000;
     }
 
-    .popup {
+    .timeout-popup {
       background-color: white;
       padding: 30px;
       border-radius: 12px;
@@ -38,7 +38,7 @@ window.addEventListener("DOMContentLoaded", () => {
       max-width: 300px;
     }
 
-    .popup button {
+    .timeout-popup button {
       margin-top: 20px;
       padding: 10px 20px;
       background-color: #007BFF;
