@@ -377,3 +377,135 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const registerForm = document.getElementById("registerForm");
+  const loginForm = document.getElementById("loginForm");
+  const switchToRegister = document.getElementById("switchToRegister");
+  const switchToLogin = document.getElementById("switchToLogin");
+
+  function toggleForms() {
+    loginForm.classList.toggle("hidden");
+    registerForm.classList.toggle("hidden");
+  }
+
+  if (switchToRegister) {
+    switchToRegister.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleForms();
+    });
+  }
+
+  if (switchToLogin) {
+    switchToLogin.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleForms();
+    });
+  }
+
+
+  if (registerForm) {
+    registerForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formInputs = registerForm.querySelectorAll("input, select, textarea");
+
+      const fullName = formInputs[0].value.trim();
+      const email = formInputs[1].value.trim();
+      const password = formInputs[2].value;
+      const confirmPassword = formInputs[3].value;
+      const dob = formInputs[4].value;
+      const gender = formInputs[5].value;
+      const address = formInputs[6].value.trim();
+      const phone = formInputs[7].value.trim();
+      const familyName = formInputs[8].value.trim();
+      const emergencyContact = formInputs[9].value.trim();
+
+      const medicalConditions = formInputs[10].value.trim();
+      const medications = formInputs[11].value.trim();
+      const allergies = formInputs[12].value.trim();
+      const accessibility = formInputs[13].value.trim();
+      const role = registerForm.querySelector("#roleSelect")?.value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      fetch("http://localhost/Updated%20Nav%20Menu/api/register.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          email,
+          password,
+          dob,
+          gender,
+          address,
+          phone,
+          familyName,
+          emergencyContact,
+          medicalConditions,
+          medications,
+          allergies,
+          accessibility,
+          role
+        })
+      })
+        .then((res) => res.json())
+        .then((response) => {
+          alert(response.message);
+          if (response.status === "success") {
+            toggleForms();
+          }
+        })
+        .catch((err) => {
+          console.error("Registration error:", err);
+          alert("Something went wrong during registration.");
+        });
+    });
+  }
+
+  // Login handler
+  if (loginForm) {
+    loginForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      try {
+        const response = await fetch("http://localhost/ICT-Project-A/api/login.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const result = await response.json();
+
+        if (result.status === "success") {
+          alert(result.message);
+          sessionStorage.setItem("role", result.role);
+          sessionStorage.setItem("username", result.username);
+
+          if (result.role.toLowerCase() === "admin") {
+            window.location.href = "staffpage.html";
+          } else if (result.role.toLowerCase() === "family member") {
+            window.location.href = "familymember.html";
+          } else if (result.role.toLowerCase() === "resident") {
+            window.location.href = "resident.html";
+          } else {
+            alert("Unknown role. Please contact support.");
+          }
+        } else {
+          alert(result.message);
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        alert("An error occurred. Please try again.");
+      }
+    });
+  }
+});
