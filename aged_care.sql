@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2025 at 12:16 PM
+-- Generation Time: May 10, 2025 at 02:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -54,10 +54,18 @@ CREATE TABLE `contact us table` (
   `message_id` int(11) NOT NULL,
   `sender_id` int(11) NOT NULL,
   `recipient_id` int(11) NOT NULL,
-  `email` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
-  `message_content` int(11) NOT NULL
+  `email` text NOT NULL,
+  `name` text NOT NULL,
+  `message_content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact us table`
+--
+
+INSERT INTO `contact us table` (`message_id`, `sender_id`, `recipient_id`, `email`, `name`, `message_content`) VALUES
+(0, 1, 1, '0', '0', '0'),
+(0, 1, 1, 'sdsds@gmail.com', 'acsd', 'afcavr');
 
 -- --------------------------------------------------------
 
