@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2025 at 12:44 AM
+-- Generation Time: May 10, 2025 at 06:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -26,56 +26,190 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `appointments table`
 --
--- Error reading structure for table aged_care.appointments table: #1932 - Table &#039;aged_care.appointments table&#039; doesn&#039;t exist in engine
--- Error reading data for table aged_care.appointments table: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `aged_care`.`appointments table`&#039; at line 1
+
+CREATE TABLE `appointments table` (
+  `appointment_id` int(11) NOT NULL,
+  `resident_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL,
+  `appointment_date` int(11) NOT NULL,
+  `time_slot` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `assigned_staff_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `contact us table`
 --
--- Error reading structure for table aged_care.contact us table: #1932 - Table &#039;aged_care.contact us table&#039; doesn&#039;t exist in engine
--- Error reading data for table aged_care.contact us table: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `aged_care`.`contact us table`&#039; at line 1
+
+CREATE TABLE `contact us table` (
+  `message_id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `recipient_id` int(11) NOT NULL,
+  `email` int(11) NOT NULL,
+  `name` int(11) NOT NULL,
+  `message_content` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `family_member table`
+--
+
+CREATE TABLE `family_member table` (
+  `id` varchar(10) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `family_member table`
+--
+
+INSERT INTO `family_member table` (`id`, `name`, `email`, `password`) VALUES
+('F001', 'Mary Johnson', 'mary.johnson@gmail.com', 'Mary#123'),
+('F002', 'Tom Carter', 'tom.carter@gmail.com', 'Tom#123'),
+('F003', 'Anil Patel', 'anil.patel@gmail.com', 'Anil#123'),
+('F004', 'Jane Doe', 'jane.doe@gmail.com', 'Jane#123');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `messages table`
 --
--- Error reading structure for table aged_care.messages table: #1932 - Table &#039;aged_care.messages table&#039; doesn&#039;t exist in engine
--- Error reading data for table aged_care.messages table: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `aged_care`.`messages table`&#039; at line 1
+
+CREATE TABLE `messages table` (
+  `message_id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `recipient_id` int(11) NOT NULL,
+  `message_content` int(11) NOT NULL,
+  `timestamp` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `resident table`
 --
--- Error reading structure for table aged_care.resident table: #1932 - Table &#039;aged_care.resident table&#039; doesn&#039;t exist in engine
--- Error reading data for table aged_care.resident table: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `aged_care`.`resident table`&#039; at line 1
+
+CREATE TABLE `resident table` (
+  `resident_id` text NOT NULL,
+  `full_name` text NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  `gender` text NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `contact_number` int(11) NOT NULL,
+  `family_contact` text NOT NULL,
+  `medication` text NOT NULL,
+  `accessibility_requirements` text NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `family_member_name` varchar(100) DEFAULT NULL,
+  `medical_conditions` text DEFAULT NULL,
+  `allergies` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `resident table`
+--
+
+INSERT INTO `resident table` (`resident_id`, `full_name`, `email`, `password`, `gender`, `date_of_birth`, `contact_number`, `family_contact`, `medication`, `accessibility_requirements`, `address`, `family_member_name`, `medical_conditions`, `allergies`) VALUES
+('R001', 'Alice Johnson', 'alicej@gmail.com', 'Alice@123', 'Female', '1945-06-12', 411122233, 'Mary Johnson', 'Aspirin, Metformin', 'Wheelchair access', '12 Rosewood Ave, Melbourne', 'Mary Johnson', 'Diabetes, Arthritis', 'Penicillin'),
+('R002', 'George Carter', 'georgec@gmail.com', 'George@123', 'Male', '1938-09-25', 411223344, 'Tom Carter', 'Lisinopril', 'Hearing aid required', '88 Lakeview Rd, Geelong', 'Tom Carter', 'Hypertension', 'None'),
+('R003', 'Mina Patel', 'minap@gmail.com', 'Mina@123', 'Female', '1950-03-08', 411334455, 'Anil Patel', 'Atorvastatin, Paracetamol', 'Ground floor room', '21 Garden St, Dandenong', 'Anil Patel', 'High cholesterol', 'Gluten'),
+('R004', 'John Doe', 'johndoe@gmail.com', 'John.123', 'Male', '1945-03-12', 412345678, '0412000111', 'Requires assistance with dressing, eating, hygiene, and mobility', 'Wheelchair access, shower seat', '123 Homecare Lane, Melbourne VIC', 'Jane Doe', 'Hypertension, Type 2 Diabetes', 'Penicillin');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `services table`
 --
--- Error reading structure for table aged_care.services table: #1932 - Table &#039;aged_care.services table&#039; doesn&#039;t exist in engine
--- Error reading data for table aged_care.services table: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `aged_care`.`services table`&#039; at line 1
+
+CREATE TABLE `services table` (
+  `service_id` int(11) NOT NULL,
+  `service_name` int(11) NOT NULL,
+  `description` int(11) NOT NULL,
+  `duration_minutes` int(11) NOT NULL,
+  `time_slot` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `assigned_staff_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `staff table`
 --
--- Error reading structure for table aged_care.staff table: #1932 - Table &#039;aged_care.staff table&#039; doesn&#039;t exist in engine
--- Error reading data for table aged_care.staff table: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `aged_care`.`staff table`&#039; at line 1
+
+CREATE TABLE `staff table` (
+  `staff_id` varchar(11) NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  `phone` int(11) NOT NULL,
+  `qualification` text NOT NULL,
+  `employment_type` text NOT NULL,
+  `salary` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `role` varchar(100) DEFAULT NULL,
+  `responsibilities` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `staff table`
+--
+
+INSERT INTO `staff table` (`staff_id`, `email`, `password`, `phone`, `qualification`, `employment_type`, `salary`, `start_date`, `full_name`, `role`, `responsibilities`) VALUES
+('S001', 'emily@gmail.com', 'Emily.001', 458762154, 'Bachelor of Nursing', 'Full-time', 60000, '2023-01-10', 'Emily James', 'Senior Caregiver', 'Patient care, daily monitoring, and medication administration'),
+('S002', 'mark@gmail.com', 'Mark@123', 412345678, 'Diploma in Health Administration', 'Full-time', 72000, '2023-09-01', 'Mark Allen', 'Facility Manager', 'Oversee daily operations, ensure compliance, manage staff and budgets'),
+('S003', 'sarah@gmail.com', 'Sarah@123', 411223344, 'MBBS, FRACGP', 'Part-time', 95000, '2024-03-15', 'Dr. Sarah Lee', 'General Practitioner', 'Conduct routine checkups, diagnose illnesses, prescribe treatments'),
+('S004', 'david@gmail.com', 'David@123', 411556677, 'Certificate IV in Nursing', 'Casual', 48000, '2023-11-05', 'David Smith', 'Home Nurse', 'Provide in-home patient care, administer medications, monitor health conditions'),
+('S005', 'linda@gmail.com', 'Linda@123', 411889900, 'Bachelor of Social Work', 'Full-time', 61000, '2024-01-20', 'Linda Brown', 'Support Coordinator', 'Assist residents in accessing services, coordinate care plans, liaise with families'),
+('S006', 'kevin@gmail.com', 'Kevin@123', 411778899, 'MD, Specialist Certification', 'Contract', 110000, '2024-02-10', 'Dr. Kevin Wu', 'Specialist Consultant', 'Provide expert consultations, evaluate complex medical cases, recommend treatment plans');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
--- Error reading structure for table aged_care.users: #1932 - Table &#039;aged_care.users&#039; doesn&#039;t exist in engine
--- Error reading data for table aged_care.users: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `aged_care`.`users`&#039; at line 1
+
+CREATE TABLE `users` (
+  `ID` int(11) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Username` text NOT NULL,
+  `Role` enum('Admin','Resident','Family Member') NOT NULL,
+  `Password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`ID`, `Email`, `Username`, `Role`, `Password`) VALUES
+(1, 'Calmmind@gmail.com', '2025-05-01', 'Admin', '$2y$10$nXbwxhD3VX61UcJc4rY7F.eUzORWkgJbvZhQExGy0Mr1br8krneaa');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
