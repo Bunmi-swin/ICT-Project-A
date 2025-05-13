@@ -39,6 +39,10 @@ function applyDarkMode(enabled) {
     }
 }
 
+function toggleElderlyMode() {
+    document.body.classList.toggle("elderly-mode");
+}
+
 function resetDefaults() {
     currentFontSize = 16;
     document.body.style.fontSize = currentFontSize + 'px';

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="universalstyle.css" rel="stylesheet" type="text/css">
+  <title>Stock Update</title>
+  <style>
+  body {
+    background-color: #f7f9fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
+  .container {
+    max-width: 2000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  h1, h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    margin-top: 40px;
+  }
+
+  .section {
+    margin-top: 20px;
+  }
+
+  .profile-photo {
+    float: right;
+    width: 200px;
+    height: 210px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 10px;
+  }
+
+  .info-item {
+    background-color: #f1f5f9;
+    padding: 10px 15px;
+    border-radius: 6px;
+  }
+
+  .info-item strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #555;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  th, td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f3f4f6;
+    text-align: left;
+  }
+
+  .clear {
+    clear: both;
+  }
+</style>
+</head>
+<body>
+
+  <div style="margin-bottom: 20px;">
+    <form action="homepage.html" method="get" style="display: inline;">
+      <button type="submit">← Back to Homepage</button>
+    </form>
+  
+    <form action="staffpage.html" method="get" style="display: inline;">
+      <button type="submit">← Back to Staff Page</button>
+    </form>
+  </div>
+    
+
+  <h2>Update Stock Quantity</h2>
+  <form action="api/update_stock.php" method="post">
+    <!-- Product ID -->
+    <label for="product_id">Product ID:</label>
+    <input type="number" id="product_id" name="product_id" required><br><br>
+
+    <!-- Quantity to Add -->
+    <label for="quantity_add">Quantity to Add:</label>
+    <input type="number" id="quantity_add" name="quantity_add"><br><br>
+
+    <!-- Quantity to Deduct -->
+    <label for="quantity_deduct">Quantity to Deduct:</label>
+    <input type="number" id="quantity_deduct" name="quantity_deduct"><br><br>
+
+    <input type="submit" value="Update Stock">
+  </form>
+</body>
+</html>
