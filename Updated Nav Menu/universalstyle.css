@@ -247,3 +247,22 @@ p {
 #accessibility-controls > button:hover {
   background-color: #2980b9;
 }
+
+.elderly-mode {
+  font-size: 20px;
+  background-color: #fef9e7;
+  color: #000;
+}
+.elderly-mode nav {
+  background-color: #ffeb99;
+}
+.elderly-mode nav a {
+  font-size: 22px;
+  color: #000;
+}
+.elderly-mode h1 {
+  font-size: 32px;
+}
+.elderly-mode p, .elderly-mode li {
+  font-size: 20px;
+}
