@@ -23,180 +23,7 @@
       { email: "Calmmind@gmail.com", username: "Defender", role: "admin", time: "2 years" },
       { email: "Gogetter@outlook.com", username: "Racer", role: "familymember", time: "1 year" },
       { email: "247Ready@gmail.com", username: "Battler", role: "resident", time: "1 year"}
-    ];
-
-    function toggleForms() {
-      document.getElementById("loginForm").classList.toggle("hidden");
-      document.getElementById("registerForm").classList.toggle("hidden");
-    }
-    
-    document.addEventListener("DOMContentLoaded", () => {
-      // Check if the current page is Login test 1.html
-      if (document.title === "Aged Care Login & Register") {
-        // Attach the login function to the form
-        const loginForm = document.getElementById("loginForm");
-        //console.log("loginForm:", loginForm); // Debugging statement
-       // if (loginForm) {
-        //  loginForm.addEventListener("submit", async function (e) {
-      //  }); else {
-      //    console.error("Element with id 'loginForm' not found in the DOM.");
-       //}
-      
-        // Attach event listeners to the "Register" and "Login" links
-        const switchToRegister = document.getElementById("switchToRegister");
-        if (switchToRegister) {
-          switchToRegister.addEventListener("click", (event) => {
-            event.preventDefault();
-            toggleForms();
-          });
-        } else {
-          console.error("Element with id 'switchToRegister' not found in the DOM.");
-        }
-    
-        const switchToLogin = document.getElementById("switchToLogin");
-        if (switchToLogin) {
-          // Register form handling
-      const registerForm = document.getElementById("registerForm");
-      if (registerForm) {
-        registerForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-    const formInputs = registerForm.querySelectorAll("input, select");
-    const email = formInputs[1].value.trim();
-    const password = formInputs[2].value;
-    const confirmPassword = formInputs[3].value;
-    const role = registerForm.querySelector("#roleSelect")?.value;
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
-    }
-
-    // Fetch existing users from localStorage
-    let storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-
-    if (storedUsers.some(user => user.email === email)) {
-      alert("An account with this email already exists.");
-      return;
-    }
-
-    storedUsers.push({ email, password, role });
-    localStorage.setItem("users", JSON.stringify(storedUsers));
-    alert("Registration successful! You can now log in.");
-    toggleForms();
-  });
-}
-
-          switchToLogin.addEventListener("click", (event) => {
-            event.preventDefault();
-            toggleForms();
-          });
-        } else {
-          console.error("Element with id 'switchToLogin' not found in the DOM.");
-        }
-      }
-    });
-
-    
-    document.addEventListener("DOMContentLoaded", () => {
-      const loginForm = document.getElementById("loginForm");
-      if (loginForm) {
-    document.getElementById('loginForm').addEventListener('submit', async function (e) {
-      e.preventDefault(); // Prevent form submission
-
-      const inputEmail = document.getElementById("email").value.trim();
-      const inputPassword = document.getElementById("password").value.trim();
-      
-      console.log("Plain-text password (frontend):", inputPassword);
-
-      try {
-      const response = await fetch('http://localhost/ICT-Project-A/Updated Nav Menu/api/login.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: inputEmail, password: inputPassword }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-  }
-      
-    const result = await response.json();
-  if (result.status === 'success') {
-      alert(result.message);
-      
-        // Store the user's role and username in sessionStorage
-        sessionStorage.setItem("role", result.role);
-        sessionStorage.setItem("username", result.username);
-        // Redirect based on role
-        //const roleSelect = document.getElementById("roleSelect").value;
-      
-      if (result.role === "Admin") {
-        alert("Login successful! Redirecting to staff page...");
-        window.location.href = "staffpage.html";
-    } else if (result.role === "Family Member") {
-        alert("Login successful! Redirecting to carer page...");
-        window.location.href = "familymember.html";
-      } else if (result.role === "Resident") {
-        alert("Login successful! Redirecting to patient page...");
-        window.location.href = "resident.html";
-      } else {
-        alert("Unknown role. Please contact support.");
-      }
-  } else {
-      alert(result.message);
-  }
-} catch (error){
-  console.error("Error during login:", error);
-  alert("An error eccoured. Please try again.")
-}
-});
-}});
-
- // Old non-API/SQL Login
-//function login(event) {
-     // event.preventDefault();
-    
-     // const inputEmail = document.getElementById("email").value.trim();
-     // const inputPassword = document.getElementById("password").value.trim();
-     // const roleSelect = document.getElementById("roleSelect").value;
-    
-    //  console.log("Email entered:", inputEmail);
-    //  console.log("Password entered:", inputPassword);
-    //  console.log("Role selected:", roleSelect);
-    
-    //  const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    
-    // const allUsers = [...users, ...storedUsers];
-    
-    //  const user = allUsers.find(
-    //    u => u.email === inputEmail && u.password === inputPassword && u.role === roleSelect
-    //  );
-    
-   //   if (!user) {
-    //    alert("Invalid email, password, or role.");
-    //    return;
-    //  }
-    
-      // Store role & username (or email if no username)
-    //  sessionStorage.setItem("role", user.role);
-    //  sessionStorage.setItem("username", user.username || user.email);
-    
-      // Log and redirect
-    //  alert("Login successful! Redirecting...");
-    
-   //   if (user.role === "admin") {
-   //     alert("Login successful! Redirecting to admin page...");
-   //     window.location.href = "staffpage.html";
-   //   } else if (user.role === "familymember") {
-   //     alert("Login successful! Redirecting to family member page...");
-   //     window.location.href = "familymember.html";
-   //   } else if (user.role === "resident") {
-   //     alert("Login successful! Redirecting to resident page...");
-   //     window.location.href = "resident.html";
-   //   } else {
-   //     alert("Unknown role. Please contact support.");
-   //   }
-   // }
-    
+    ];          
 
       function switchrole(role){
         if (role == "Staff"){
@@ -220,102 +47,6 @@
         });
     }
   }
-
-   //Adaptive filling for staff page
-  document.addEventListener("DOMContentLoaded", () => {
-    // Check if the current page is the staff page
-    if (window.location.pathname.endsWith("staff.html")) {
-      // Retrieve the username and role from sessionStorage
-      const username = sessionStorage.getItem("username");
-      
-  
-      // Update the profileplaceholder elements if username exists
-      if (username) {
-        const usernamePlaceholder = document.getElementById("profileplaceholder");
-        const employmentPlaceholder = document.getElementById("profileplaceholder2");
-  
-        if (usernamePlaceholder) {
-          usernamePlaceholder.textContent = `Username: ${username}`;
-        }
-  
-        if (employmentPlaceholder) {
-          // Find the user's employment length from the users array
-          const user = users.find(u => u.username === username);
-          if (user) {
-            employmentPlaceholder.textContent = `Length of Employment: ${user.time}`;
-          }
-        }
-      } else {
-        // Redirect to login page if no username is found
-        alert("You are not logged in. Redirecting to login page.");
-        window.location.href = "login test 1.html";
-      }
-    }
-  });
-
-   //Adaptive filling for patient page
-  document.addEventListener("DOMContentLoaded", () => {
-    // Check if the current page is the patient page
-    if (window.location.pathname.endsWith("patient.html")) {
-      // Retrieve the username and role from sessionStorage
-      const username = sessionStorage.getItem("username");
-      
-  
-      // Update the profileplaceholder elements if username exists
-      if (username) {
-        const usernamePlaceholder = document.getElementById("profileplaceholder");
-        const employmentPlaceholder = document.getElementById("profileplaceholder2");
-  
-        if (usernamePlaceholder) {
-          usernamePlaceholder.textContent = `Username: ${username}`;
-        }
-  
-        if (employmentPlaceholder) {
-          // Find the user's employment length from the users array
-          const user = users.find(u => u.username === username);
-          if (user) {
-            employmentPlaceholder.textContent = `Length of Membership: ${user.time}`;
-          }
-        }
-      } else {
-        // Redirect to login page if no username is found
-        alert("You are not logged in. Redirecting to login page.");
-        window.location.href = "login test 1.html";
-      }
-    }
-  });
-  
-  //Adaptive filling for carer page
-  document.addEventListener("DOMContentLoaded", () => {
-    // Check if the current page is the carer page
-    if (window.location.pathname.endsWith("carer.html")) {
-      // Retrieve the username and role from sessionStorage
-      const username = sessionStorage.getItem("username");
-      
-  
-      // Update the profileplaceholder elements if username exists
-      if (username) {
-        const usernamePlaceholder = document.getElementById("profileplaceholder");
-        const employmentPlaceholder = document.getElementById("profileplaceholder2");
-  
-        if (usernamePlaceholder) {
-          usernamePlaceholder.textContent = `Username: ${username}`;
-        }
-  
-        if (employmentPlaceholder) {
-          // Find the user's employment length from the users array
-          const user = users.find(u => u.username === username);
-          if (user) {
-            employmentPlaceholder.textContent = `Length of Membership: ${user.time}`;
-          }
-        }
-      } else {
-        // Redirect to login page if no username is found
-        alert("You are not logged in. Redirecting to login page.");
-        window.location.href = "login test 1.html";
-      }
-    }
-  });
 
   const logs = []; // Array to store log messages
 
@@ -346,16 +77,14 @@ window.addEventListener("beforeunload", () => {
 });
 
 // Retrieve logs from sessionStorage on page load
-document.addEventListener("DOMContentLoaded", () => {
+
   const storedLogs = JSON.parse(sessionStorage.getItem("logs"));
   if (storedLogs) {
     logs.push(...storedLogs);
   }
-});
 
 
 //Monitoring for staff only
-document.addEventListener("DOMContentLoaded", () => {
   // Create a button to download logs
   const downloadButton = document.createElement("button");
   downloadButton.textContent = "Download Logs";
@@ -365,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
     link.href = URL.createObjectURL(blob);
     link.download = "console_logs.txt";
     link.click();
-  };
 
   // Append the button only on the staff page
   if (window.location.pathname.endsWith("staffpage.html")) {
@@ -376,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Element with id 'Staff Schedule' not found.");
     }
   }
-});
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   const registerForm = document.getElementById("registerForm");
@@ -473,6 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
+      console.log("Plain-text password (frontend):", inputPassword);
 
       try {
         const response = await fetch("http://localhost/ICT-Project-A/Updated Nav Menu/api/login.php", {

@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="universalstyle.css"/>
   <link href="sitepath.css" rel="stylesheet" type="text/css">
-  <script src="js/scripts.js"></script>
 </head>
 
 <style>
@@ -62,7 +61,7 @@
         <h2>Login</h2>
         <input type="email" id="email" placeholder="Email" required />
         <input type="password" id="password" placeholder="Password" required />
-        <select id="roleSelect" required>
+        <select id="roleSelectLogin" required>
             <option value="">Select Role</option>
             <option value="admin">Admin</option>
             <option value="familymember">Family Member</option>
@@ -110,7 +109,7 @@
             <div><textarea placeholder="Accessibility Requirements" rows="3"></textarea></div>
         </div>
 
-        <select id="roleSelect" required>
+        <select id="roleSelectRegister" required>
             <option value="">Select Role</option>
             <option value="resident">Resident</option>
         </select>
@@ -121,31 +120,7 @@
       </div>
         </form>
     </div>
-
-    <!-- <script>
-        function toggleForms() {
-        document.getElementById('loginForm').classList.toggle('hidden');
-        document.getElementById('registerForm').classList.toggle('hidden');
-
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault(); 
-
-        
-        const role = document.querySelector('#loginForm select').value;
-
-        if (role === 'admin' || role === 'carer') {
-        alert('Login successful! Redirecting to staff page...');
-        window.location.href = 'staff.html';
-        } else if (role === 'family') {
-        alert('Login successful! Redirecting to patient page...');
-        window.location.href = 'patient.html';
-        } else {
-        alert('Please select a valid role.');
-        }
-    });
-        }
-    </script> -->
-
+    <script src="js/scripts.js"></script>
     <script src="accessibility.js"></script>
     <script src="js/sidebar-navigation.js"></script>
 </body>
