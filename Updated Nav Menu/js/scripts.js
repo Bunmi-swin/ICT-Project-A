@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
-      console.log("Plain-text password (frontend):", inputPassword);
+      console.log("Plain-text password (frontend):", password);
 
       try {
         const response = await fetch("http://localhost/ICT-Project-A/Updated Nav Menu/api/login.php", {
