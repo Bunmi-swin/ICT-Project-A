@@ -45,6 +45,8 @@
     </script>
 </head>
 
+
+
 <body>
 
     <!-- Menu Button -->
@@ -112,7 +114,7 @@
                     <th>Condition</th>
                 </tr>
             </thead>
-            <tbody>
+          <!--  <tbody>
                 <tr data-category="mobility">
                     <td>Standard Wheelchair</td>
                     <td>Foldable standard wheelchair with footrests</td>
@@ -218,7 +220,12 @@
                     <td><span class="availability available">In Stock</span></td>
                     <td>New</td>
                 </tr>
+            </tbody> -->
+
+            <tbody id="inventoryBody">
+                <!-- Will be filled by JS -->
             </tbody>
+            
         </table>
 
         <div class="category-section">
@@ -246,6 +253,52 @@
 
     <script src="accessibility.js"></script>
     <script src="js/sidebar-navigation.js"></script>
+
+    <script>
+        // Fetch stock data from the server and populate the table
+        fetch('api/get_stock.php')
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('inventoryBody');
+                tbody.innerHTML = ''; // Clear existing
+    
+                data.forEach(product => {
+                    const row = document.createElement('tr');
+                    row.setAttribute('data-category', 'medical'); // Placeholder category for now
+    
+                    row.innerHTML = `
+    <td>${product.product_name}</td>
+    <td>${product.description || '–'}</td>
+    <td>Medical Supplies</td>
+    <td>
+        <span class="availability ${
+            product.stock_quantity > 5
+                ? 'available'
+                : product.stock_quantity > 0
+                    ? 'limited'
+                    : 'unavailable'
+        }">
+            ${
+                product.stock_quantity > 5
+                    ? 'In Stock (' + product.stock_quantity + ')'
+                    : product.stock_quantity > 0
+                        ? 'Limited (' + product.stock_quantity + ')'
+                        : 'Out of Stock'
+            }
+        </span>
+    </td>
+    <td>–</td>
+`;
+
+
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading stock data:', error);
+            });
+    </script>
+    
 </body>
 
 </html>
