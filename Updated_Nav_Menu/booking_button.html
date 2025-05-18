@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="js/scripts.js"></script>
+  <title>Access Booking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f6fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    a.button {
+      padding: 12px 20px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    a.button:hover {
+      background-color: #2980b9;
+    }
+    .elderly-mode {
+    font-size: 20px;
+    background-color: #fef9e7;
+    color: #000;
+}
+.elderly-mode nav {
+    background-color: #ffeb99;
+}
+.elderly-mode nav a {
+    font-size: 22px;
+    color: #000;
+}
+.elderly-mode h1 {
+    font-size: 32px;
+}
+.elderly-mode p, .elderly-mode li {
+    font-size: 20px;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Accessibility Options -->
+<div id="accessibility-controls" style="padding: 10px; background-color: #f0f0f0; text-align: right;">
+  <button onclick="toggleAccessibilityMenu()">Accessibility</button>
+  <div id="accessibility-menu" style="display: none; margin-top: 10px;">
+      <button onclick="increaseTextSize()">A+</button>
+      <button onclick="decreaseTextSize()">A-</button>
+      <button onclick="toggleDarkMode()">Dark Mode</button>
+      <button onclick="toggleElderlyMode()">Elderly Mode</button>
+      <button onclick="resetDefaults()">Set to Default</button>
+  </div>
+</div>
+
+  <div class="container">
+    <h1>Welcome to Aged Care Booking</h1>
+    <p>Please login or register before booking a service.</p>
+    <div class="button-group">
+      <a href="registerlogin.html" class="button">Login / Register</a>
+      <a href="homepage.html" class="button" style="background-color: #95a5a6;">Back to Home</a>
+    </div>
+  </div>
+  <script src="accessibility.js"></script>
+
+</body>
+</html>

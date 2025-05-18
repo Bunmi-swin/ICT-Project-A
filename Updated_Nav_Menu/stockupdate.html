@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="universalstyle.css" rel="stylesheet" type="text/css" />
+  <title>Stock Update</title>
+  <style>
+    body {
+      background-color: #f7f9fc;
+      padding: 40px 20px;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .container {
+      display: flex;
+      max-width: 900px;
+      width: 100%;
+      gap: 40px;
+    }
+
+    /* Left column: Product List */
+    .product-list {
+      flex: 1;
+      background: #eef4fb;
+      border-radius: 12px;
+      padding: 30px 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+    }
+
+    .product-list strong {
+      display: block;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #4a90e2;
+      text-align: center;
+      border-bottom: 2px solid #4a90e2;
+      padding-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1.1rem;
+      color: #2c3e50;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #dbe7f4;
+      text-align: left;
+    }
+
+    th {
+      background-color: #d6e4fd;
+      font-weight: 700;
+      color: #4a90e2;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Right column: Form */
+    form {
+      flex: 1;
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      color: #2c3e50;
+      border-bottom: 3px solid #4a90e2;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    label {
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+      font-size: 1rem;
+    }
+
+    input[type="number"] {
+      padding: 10px 14px;
+      margin-bottom: 25px;
+      border: 1.8px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    input[type="number"]:focus {
+      border-color: #4a90e2;
+      outline: none;
+      box-shadow: 0 0 8px rgba(74,144,226,0.3);
+    }
+
+    input[type="submit"] {
+      background-color: #4a90e2;
+      color: white;
+      padding: 14px 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #357ABD;
+    }
+
+    /* Responsive for smaller screens */
+    @media (max-width: 720px) {
+      body {
+        padding: 20px 10px;
+      }
+      .container {
+        flex-direction: column;
+        max-width: 400px;
+        gap: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="product-list" aria-label="Available products">
+      <strong>Product ID and Name Reference</strong>
+      <table>
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Face Mask</td></tr>
+          <tr><td>2</td><td>Hand Sanitizer</td></tr>
+          <tr><td>3</td><td>Gloves</td></tr>
+          <tr><td>4</td><td>Disposable Cups</td></tr>
+          <tr><td>5</td><td>Paper Towels</td></tr>
+          <tr><td>6</td><td>Antiseptic Wipes</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <form action="api/update_stock.php" method="post" aria-label="Stock update form">
+      <h2>Update Stock Quantity</h2>
+
+      <label for="product_id">Product ID:</label>
+      <input
+        type="number"
+        id="product_id"
+        name="product_id"
+        required
+        min="1"
+        max="6"
+        placeholder="Enter product ID"
+      />
+
+      <label for="quantity_add">Quantity to Add:</label>
+      <input
+        type="number"
+        id="quantity_add"
+        name="quantity_add"
+        min="0"
+        placeholder="Enter quantity to add"
+      />
+
+      <label for="quantity_deduct">Quantity to Deduct:</label>
+      <input
+        type="number"
+        id="quantity_deduct"
+        name="quantity_deduct"
+        min="0"
+        placeholder="Enter quantity to deduct"
+      />
+
+      <input type="submit" value="Update Stock" />
+    </form>
+  </div>
+</body>
+</html>

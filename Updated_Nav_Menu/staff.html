@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Dedicated Staff - Age Care Facility</title>
+    <link rel="stylesheet" href="universalstyle.css">
+    <link href="sitepath.css" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .staff-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f8fdfd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .staff-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .staff-table th, .staff-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .staff-table th {
+            background-color: #e3f1f1;
+        }
+
+        .filter {
+            margin: 15px 0;
+        }
+    </style>
+
+    <script>
+        function filterStaff() {
+            const filter = document.getElementById("serviceFilter").value.toLowerCase();
+            const rows = document.querySelectorAll(".staff-table tbody tr");
+
+            rows.forEach(row => {
+                const category = row.getAttribute("data-category").toLowerCase();
+                row.style.display = (filter === "all" || category === filter) ? "" : "none";
+            });
+        }
+    </script>
+</head>
+<body>
+
+<div class="sitepath">
+    <a href="homepage.html">Home</a> &gt; <a href="about_us.html">About Us</a> &gt; <a href="staff.html">Staff</a>
+</div>
+
+<!-- Accessibility Options -->
+<div id="accessibility-controls" style="padding: 10px; background-color: #f0f0f0; text-align: right;">
+    <button onclick="toggleAccessibilityMenu()">Accessibility</button>
+    <div id="accessibility-menu" style="display: none; margin-top: 10px;">
+        <button onclick="increaseTextSize()">A+</button>
+        <button onclick="decreaseTextSize()">A-</button>
+        <button onclick="toggleDarkMode()">Dark Mode</button>
+        <button onclick="toggleElderlyMode()">Elderly Mode</button>
+        <button onclick="resetDefaults()">Set to Default</button>
+    </div>
+</div>
+
+
+    <!-- Menu Button -->
+    <div class="menu-btn" onclick="toggleNav()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <!-- Overlay -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="mySidebar" class="sidebar">
+        <span class="close-btn" onclick="closeNav()" title="Leave Menu">&times;</span>
+        <a class="active" href="homepage.html">Home</a>
+        <a href="about_us.html">About Us</a>
+        <a href="service.html">Services</a>
+        <a href="contact_us.html">Contact Us</a>
+        <a href="booking_button.html">Book Services</a>
+        <a href="registerlogin.html">Register/Login</a>
+    </div>
+
+<div class="staff-container">
+    <h1>Meet Our Dedicated Staff</h1>
+    <p>
+        Our facility is powered by a team of passionate professionals who care deeply about the well-being of our residents.
+        Each team member is selected based on experience, compassion, and a commitment to aged care excellence.
+    </p>
+
+    <p>
+        Below is a list of our staff and their specializations. You can filter by the type of service they provide.
+    </p>
+
+    <label class="filter" for="serviceFilter">Filter by Service:</label>
+    <select id="serviceFilter" onchange="filterStaff()">
+        <option value="all">All</option>
+        <option value="in-home care">In-Home Care</option>
+        <option value="residential care">Residential Care</option>
+        <option value="medical checkup">Medical Checkup</option>
+    </select>
+
+    <table class="staff-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Service Category</th>
+                <th>Contact</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-category="in-home care">
+                <td>Emily Johnson</td>
+                <td>Senior Caregiver</td>
+                <td>In-Home Care</td>
+                <td>emily@gmail.com</td>
+            </tr>
+            <tr data-category="residential care">
+                <td>Mark Allen</td>
+                <td>Facility Manager</td>
+                <td>Residential Care</td>
+                <td>mark@gmail.com</td>
+            </tr>
+            <tr data-category="medical checkup">
+                <td>Dr. Sarah Lee</td>
+                <td>General Practitioner</td>
+                <td>Medical Checkup</td>
+                <td>sarah@gmail.com</td>
+            </tr>
+            <tr data-category="in-home care">
+                <td>David Smith</td>
+                <td>Home Nurse</td>
+                <td>In-Home Care</td>
+                <td>david@gmail.com</td>
+            </tr>
+            <tr data-category="residential care">
+                <td>Linda Brown</td>
+                <td>Support Coordinator</td>
+                <td>Residential Care</td>
+                <td>linda@gmail.com</td>
+            </tr>
+            <tr data-category="medical checkup">
+                <td>Dr. Kevin Wu</td>
+                <td>Specialist Consultant</td>
+                <td>Medical Checkup</td>
+                <td>kevin@gmail.com</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="accessibility.js"></script>
+    <script src="js/sidebar-navigation.js"></script>
+
+</body>
+</html>

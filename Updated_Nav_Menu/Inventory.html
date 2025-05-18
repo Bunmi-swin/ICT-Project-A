@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="ICTProject, Aged Care, Management System, Inventory">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - Aged Care Facility</title>
+    <link rel="stylesheet" href="universalstyle.css">
+    <link href="sitepath.css" rel="stylesheet" type="text/css">
+
+
+    <script>
+        function filterInventory() {
+            const filter = document.getElementById("categoryFilter").value.toLowerCase();
+            const rows = document.querySelectorAll(".inventory-table tbody tr");
+
+            rows.forEach(row => {
+                const category = row.getAttribute("data-category").toLowerCase();
+                row.style.display = (filter === "all" || category === filter) ? "" : "none";
+            });
+        }
+
+        function searchInventory() {
+            const filter = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.querySelectorAll(".inventory-table tbody tr");
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(filter) ? "" : "none";
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Site Path Navigation -->
+    <div class="sitepath">
+        <a href="staffpage.html">Profile</a> &gt; <a href="inventory.html">Inventory</a>
+    </div>
+
+    <!-- Menu Button -->
+    <div class="menu-btn" onclick="toggleNav()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Overlay & Sidebar Navigation -->
+    <div id="overlay" class="overlay"></div>
+    <div id="mySidebar" class="sidebar">
+        <span class="close-btn" onclick="closeNav()" title="Leave Menu">&times;</span>
+        <a class="active" href="homepage.html">Home</a>
+        <a href="about_us.html">About Us</a>
+        <a href="service.html">Services</a>
+        <a href="staff_roster.html">Roster</a>
+      <a href="inventory.html" class="active">Inventory</a>
+        <a href="stockupdate.php">Update Stock</a>
+        <!-- <a href="booking_button.html">Book Services</a> -->
+        <a href="registerlogin.html" onclick="handleLogout()">Logout</a>
+    </div>
+
+    <!-- Accessibility Controls -->
+    <div id="accessibility-controls">
+        <button onclick="toggleAccessibilityMenu()">Accessibility</button>
+        <div id="accessibility-menu" style="display: none; margin-top: 10px;">
+            <button onclick="increaseTextSize()">A+</button>
+            <button onclick="decreaseTextSize()">A-</button>
+            <button onclick="toggleDarkMode()">Dark Mode</button>
+            <button onclick="toggleElderlyMode()">Elderly Mode</button>
+            <button onclick="resetDefaults()">Set to Default</button>
+        </div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+        <!-- Inventory Section -->
+        <div class="inventory-container">
+            <h1>Our Care Equipment & Supplies</h1>
+            <p>
+                At our aged care facility, we provide a wide range of quality equipment and supplies to ensure the comfort, 
+            safety, and wellbeing of our residents. Below is our current inventory of items available for resident use,
+            rental, or purchase. Please contact our staff for assistance with any items you may need.
+            </p>
+        </div>
+
+        <!-- The Table remains outside this container, so no changes -->
+        <table class="inventory-table" id="inventoryTable">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Availability</th>
+                </tr>
+            </thead>
+            <tbody id="inventoryBody">
+                <!-- Inventory rows will be inserted here by JS -->
+            </tbody>
+        </table>
+
+        <!-- Add New Product Form -->
+<div class="main-content">
+    <h2>Add New Product</h2>
+    <form id="addProductForm">
+        <label for="product_name">Product Name:</label><br>
+        <input type="text" id="product_name" name="product_name" required><br><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description"></textarea><br><br>
+
+        <label for="stock_quantity">Stock Quantity:</label><br>
+        <input type="number" id="stock_quantity" name="stock_quantity" required><br><br>
+
+        <button type="submit">Add Product</button>
+        <p id="formMessage" style="color: green;"></p>
+    </form>
+</div>
+
+
+        <div class="main-content">
+            <!-- Request Equipment Instructions -->
+            <div class="category-section">
+                <h2>How to Request Equipment</h2>
+                <ol>
+                    <li>Speak with your care coordinator or facility staff</li>
+                    <li>Fill out a request form at the front desk</li>
+                    <li>Call our team at (03) 9876-5432</li>
+                    <li>Email: <a href="mailto:equipment@agecarefacility.com.au">equipment@agecarefacility.com.au</a></li>
+                </ol>
+                <p>Standard equipment is available within 24 hours. Special items may take longer.</p>
+            </div>
+
+            <!-- Custom Request Info -->
+            <div class="category-section">
+                <h2>Custom Equipment Requests</h2>
+                <p>Don't see what you need? We can source specialized equipment upon request. Our team works with 
+                various suppliers to ensure we can accommodate specific needs. Please allow 3-5 business days 
+                for special order requests.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript & Data Fetching -->
+    <script src="timeout.js"></script>
+    <script src="accessibility.js"></script>
+    <script src="js/sidebar-navigation.js"></script>
+
+    <script>
+    // Fetch stock data from the server and populate the table
+    fetch('api/inventory.php')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById('inventoryBody');
+            tbody.innerHTML = ''; // Clear any existing rows
+
+            data.forEach(product => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${product.product_name}</td>
+                    <td>${product.description || '–'}</td>
+                    <td>
+                        <span class="availability ${
+                            product.stock_quantity > 5
+                                ? 'available'
+                                : product.stock_quantity > 0
+                                    ? 'limited'
+                                    : 'unavailable'
+                        }">
+                            ${
+                                product.stock_quantity > 5
+                                    ? 'In Stock (' + product.stock_quantity + ')'
+                                    : product.stock_quantity > 0
+                                        ? 'Limited (' + product.stock_quantity + ')'
+                                        : 'Out of Stock'
+                            }
+                        </span>
+                    </td>
+                `;
+
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading stock data:', error);
+        });
+</script>
+
+<script>
+    document.getElementById("addProductForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch("api/add_product.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(result => {
+            const msg = document.getElementById("formMessage");
+            if (result.success) {
+                msg.style.color = "green";
+                msg.textContent = "Product added successfully!";
+                this.reset();
+
+                // Optionally reload the table without refreshing page
+                return fetch('api/inventory.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tbody = document.getElementById('inventoryBody');
+                        tbody.innerHTML = '';
+                        data.forEach(product => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${product.product_name}</td>
+                                <td>${product.description || '–'}</td>
+                                <td>
+                                    <span class="availability ${
+                                        product.stock_quantity > 5
+                                            ? 'available'
+                                            : product.stock_quantity > 0
+                                                ? 'limited'
+                                                : 'unavailable'
+                                    }">
+                                        ${
+                                            product.stock_quantity > 5
+                                                ? 'In Stock (' + product.stock_quantity + ')'
+                                                : product.stock_quantity > 0
+                                                    ? 'Limited (' + product.stock_quantity + ')'
+                                                    : 'Out of Stock'
+                                        }
+                                    </span>
+                                </td>
+                            `;
+                            tbody.appendChild(row);
+                        });
+                    });
+            } else {
+                msg.style.color = "red";
+                msg.textContent = "Failed to add product.";
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("formMessage").textContent = "Error adding product.";
+        });
+    });
+</script>
+
+</body>
+
+</html>
+
+<style>
+.inventory-table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    font-size: 1.1em;
+    text-align: center;
+}
+.inventory-table th, .inventory-table td {
+    border: 1px solid #ddd;
+    padding: 12px 8px;
+    text-align: left;
+}
+.inventory-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+.inventory-table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+.inventory-table tr:hover {
+    background-color: #f1f7ff;
+}
+.availability.available {
+    color: #2e7d32;
+    font-weight: bold;
+}
+.availability.limited {
+    color: #f9a825;
+    font-weight: bold;
+}
+.availability.unavailable {
+    color: #c62828;
+    font-weight: bold;
+}
+
+.main-content {
+    max-width: 900px;
+    margin: 0 auto; /* centers the container horizontally */
+    text-align: center; /* center all text inside */
+}
+.main-content p,
+.main-content ol,
+.main-content h1,
+.main-content h2,
+.main-content .category-section {
+    margin-left: auto;
+    margin-right: auto;
+    /* to keep paragraphs and lists centered */
+}
+.main-content ol {
+    text-align: left;
+    display: inline-block;
+}
+
+#addProductForm {
+    background-color: #ffffff;
+    padding: 30px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+}
+
+#addProductForm label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+}
+
+#addProductForm input[type="text"],
+#addProductForm input[type="number"],
+#addProductForm textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+#addProductForm input:focus,
+#addProductForm textarea:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+#addProductForm button[type="submit"] {
+    background-color: #4a90e2;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#addProductForm button[type="submit"]:hover {
+    background-color: #357ABD;
+}
+
+#formMessage {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+</style>
+

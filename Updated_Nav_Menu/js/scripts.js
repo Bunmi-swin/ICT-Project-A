@@ -1,0 +1,240 @@
+ // List of scripts used throughout the website.
+
+ //Console.log monitoring for switching pages
+
+    //selects navigation links with class="nav-link"
+    const navLinks = document.querySelectorAll(".nav-link");
+    navLinks.forEach(link => {
+      link.addEventListener("click", (event) => {
+        const destination = link.getAttribute("href");
+        console.log(`User navigated to: ${destination}`);
+      });
+    });
+
+      // Default user role for sessions(Role Based Access)
+    //Changes through functions like signing it. Resets if tabs are closed.
+    sessionStorage.setItem("role", "Guest"); 
+
+    // Check user's current role and restrict access
+    const role = sessionStorage.getItem("role");
+    // Define users and their roles:
+
+    const users = [
+      { email: "Calmmind@gmail.com", username: "Defender", role: "admin", time: "2 years" },
+      { email: "Gogetter@outlook.com", username: "Racer", role: "familymember", time: "1 year" },
+      { email: "247Ready@gmail.com", username: "Battler", role: "resident", time: "1 year"}
+    ];          
+
+      function switchrole(role){
+        if (role == "Staff"){
+        sessionStorage.setItem("role", "Staff"); 
+      }else if (role == "Carer"){
+        sessionStorage.setItem("role", "Carer"); 
+      } else if (role == "User"){
+        sessionStorage.setItem("role", "User"); 
+      }
+  
+      }
+
+
+    function verifyadminaccess(event){
+    //Link to admin only page, etc. is clicked
+    if (role !== "Staff") {
+        // Stop default behaviour and prevent access.
+        profileLink.addEventListener("click", (event) => {
+          event.preventDefault();
+          alert("Access denied: Only staff can view this page.");
+        });
+    }
+  }
+
+  const logs = []; // Array to store log messages
+
+// Override console.log to include timestamps
+const originalConsoleLog = console.log;
+console.log = function (...args) {
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes().toString().padStart(2, "0");
+  const ampm = hours >= 12 ? "pm" : "am";
+  const formattedHours = hours % 12 || 12;
+  const timestamp = `${formattedHours}:${minutes}${ampm}`;
+  const logMessage = `[${timestamp}] ${args.join(" ")}`;
+  
+  // Store the log message in the logs array
+  logs.push(logMessage);
+
+  //Call the list of console.log outputs
+  originalConsoleLog(logMessage);
+}
+// Example logs
+console.log("User B successfully logged in.");
+console.log("User A logged out.");
+
+// Save logs to sessionStorage
+window.addEventListener("beforeunload", () => {
+  sessionStorage.setItem("logs", JSON.stringify(logs));
+});
+
+// Retrieve logs from sessionStorage on page load
+
+  const storedLogs = JSON.parse(sessionStorage.getItem("logs"));
+  if (storedLogs) {
+    logs.push(...storedLogs);
+  }
+
+
+//Monitoring for staff only
+  // Create a button to download logs
+  const downloadButton = document.createElement("button");
+  downloadButton.textContent = "Download Logs";
+  downloadButton.onclick = function () {
+    const blob = new Blob([logs.join("\n")], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "console_logs.txt";
+    link.click();
+
+  // Append the button only on the staff page
+  if (window.location.pathname.endsWith("staffpage.html")) {
+    const monitoringstaffactivity = document.getElementById("monitoringstaffactivity");
+    if (monitoringstaffactivity) {
+      monitoringstaffactivity.appendChild(downloadButton); // Add the button to the Staff Schedule section
+    } else {
+      console.error("Element with id 'Staff Schedule' not found.");
+    }
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const registerForm = document.getElementById("registerForm");
+  const loginForm = document.getElementById("loginForm");
+  const switchToRegister = document.getElementById("switchToRegister");
+  const switchToLogin = document.getElementById("switchToLogin");
+
+  function toggleForms() {
+    loginForm.classList.toggle("hidden");
+    registerForm.classList.toggle("hidden");
+  }
+
+  if (switchToRegister) {
+    switchToRegister.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleForms();
+    });
+  }
+
+  if (switchToLogin) {
+    switchToLogin.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleForms();
+    });
+  }
+
+
+  if (registerForm) {
+    registerForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formInputs = registerForm.querySelectorAll("input, select, textarea");
+
+      const fullName = formInputs[0].value.trim();
+      const email = formInputs[1].value.trim();
+      const password = formInputs[2].value;
+      const confirmPassword = formInputs[3].value;
+      const dob = formInputs[4].value;
+      const gender = formInputs[5].value;
+      const address = formInputs[6].value.trim();
+      const phone = formInputs[7].value.trim();
+      const familyName = formInputs[8].value.trim();
+      const emergencyContact = formInputs[9].value.trim();
+
+      const medicalConditions = formInputs[10].value.trim();
+      const medications = formInputs[11].value.trim();
+      const allergies = formInputs[12].value.trim();
+      const accessibility = formInputs[13].value.trim();
+      const role = registerForm.querySelector("#roleSelect")?.value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      fetch("../api/register.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          email,
+          password,
+          dob,
+          gender,
+          address,
+          phone,
+          familyName,
+          emergencyContact,
+          medicalConditions,
+          medications,
+          allergies,
+          accessibility,
+          role
+        })
+      })
+        .then((res) => res.json())
+        .then((response) => {
+          alert(response.message);
+          if (response.status === "success") {
+            toggleForms();
+          }
+        })
+        .catch((err) => {
+          console.error("Registration error:", err);
+          alert("Something went wrong during registration.");
+        });
+    });
+  }
+
+  // Login handler
+  if (loginForm) {
+    loginForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      console.log("Plain-text password (frontend):", password);
+
+      try {
+        const response = await fetch("../api/login.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const result = await response.json();
+
+        if (result.status === "success") {
+          alert(result.message);
+          sessionStorage.setItem("role", result.role);
+          sessionStorage.setItem("username", result.username);
+
+          if (result.role.toLowerCase() === "admin") {
+            window.location.href = "staffpage.html";
+          } else if (result.role.toLowerCase() === "family member") {
+            window.location.href = "familymember.html";
+          } else if (result.role.toLowerCase() === "resident") {
+            window.location.href = "resident.html";
+          } else {
+            alert("Unknown role. Please contact support.");
+          }
+        } else {
+          alert(result.message);
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        alert("An error occurred. Please try again.");
+      }
+    });
+  }
+});
