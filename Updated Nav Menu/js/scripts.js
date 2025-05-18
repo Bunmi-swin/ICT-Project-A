@@ -153,14 +153,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const medications = formInputs[11].value.trim();
       const allergies = formInputs[12].value.trim();
       const accessibility = formInputs[13].value.trim();
-      const role = registerForm.querySelector("#roleSelect")?.value;
+      const role = registerForm.querySelector("#roleSelectRegister")?.value;
 
       if (password !== confirmPassword) {
         alert("Passwords do not match.");
         return;
       }
-
-      fetch("http://localhost/Updated%20Nav%20Menu/api/register.php", {
+      //If root folder is Updated Nav Menu
+      //fetch("http://localhost/Updated%20Nav%20Menu/api/register.php", {
+      //If root folder is ICT-Project-A
+      fetch("http://localhost/ICT-Project-A/Updated%20Nav%20Menu/api/register.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
