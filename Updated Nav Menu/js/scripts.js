@@ -206,6 +206,9 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Plain-text password (frontend):", password);
 
       try {
+        //If root folder is Updated Nav Menu
+        //const response = fetch("http://localhost/Updated%20Nav%20Menu/api/login.php", {
+        //If root folder is ICT-Project-A
         const response = await fetch("http://localhost/ICT-Project-A/Updated Nav Menu/api/login.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -48,7 +48,7 @@ try {
         ':resident_id' => $newId,
         ':full_name' => $data['fullName'],
         ':email' => $data['email'],
-        ':password' => $data['password'],
+        ':password' => password_hash($data['password'], PASSWORD_DEFAULT), // <-- hash here
         ':gender' => $data['gender'],
         ':dob' => $data['dob'],
         ':phone' => $data['phone'],
